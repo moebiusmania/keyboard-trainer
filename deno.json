@@ -1,0 +1,15 @@
+{
+  "imports": {
+    "lume/": "https://deno.land/x/lume@v3.2.5/"
+  },
+  "tasks": {
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "build": "deno task lume",
+    "serve": "deno task lume -s",
+    "dev:host": "deno task lume -s --hostname 0.0.0.0"
+  },
+  "compilerOptions": {
+    "types": ["lume/types.ts"]
+  },
+  "lock": false
+}

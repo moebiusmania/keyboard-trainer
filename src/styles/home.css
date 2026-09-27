@@ -1,0 +1,273 @@
+/* ---------- Home ---------- */
+.eroe {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding-block: 1rem 2rem;
+  text-align: center;
+  isolation: isolate;
+}
+
+.lettere-volanti {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  & span {
+    --n: 15;
+    --angolo: calc(var(--i) / var(--n) * 360deg);
+    position: absolute;
+    inset-block-start: calc(45% + sin(var(--angolo)) * 42%);
+    inset-inline-start: calc(50% + cos(var(--angolo)) * 46%);
+    display: grid;
+    place-items: center;
+    inline-size: 2.4rem;
+    aspect-ratio: 1;
+    font-family: var(--font-lettere);
+    font-weight: 700;
+    font-size: 1.2rem;
+    background: var(--bianco);
+    border: 2px solid color-mix(in oklch, var(--inchiostro) 40%, transparent);
+    border-radius: 0.5rem;
+    color: color-mix(in oklch, var(--inchiostro) 55%, transparent);
+    opacity: 0.7;
+    animation: galleggia 6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.7s);
+  }
+}
+
+@keyframes galleggia {
+  0%, 100% { translate: -50% -50%; rotate: -8deg; }
+  50% { translate: -50% calc(-50% - 14px); rotate: 8deg; }
+}
+
+.titolo-tasti {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4em 0.7em;
+  font-size: clamp(2.2rem, 1.2rem + 5vw, 4.6rem);
+}
+
+.titolo-parola {
+  display: flex;
+  gap: 0.12em;
+}
+
+.tasto-titolo {
+  --colore: var(--giallo);
+  text-transform: uppercase;
+  display: grid;
+  place-items: center;
+  inline-size: 1.25em;
+  aspect-ratio: 1 / 1.05;
+  background: var(--colore);
+  border: var(--bordo);
+  border-radius: 0.22em;
+  box-shadow: 0 0.12em 0 var(--inchiostro), inset 0 -0.08em 0 color-mix(in oklch, var(--colore), var(--inchiostro) 25%);
+  animation:
+    tasto-entra 700ms var(--molla) both,
+    tasto-premuto 5s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 80ms), calc(1.5s + var(--i) * 250ms);
+
+  &:nth-child(4n + 2) { --colore: var(--rosa); }
+  &:nth-child(4n + 3) { --colore: var(--azzurro); }
+  &:nth-child(4n + 4) { --colore: var(--verde); }
+}
+
+@keyframes tasto-entra {
+  from {
+    opacity: 0;
+    translate: 0 -2em;
+    rotate: -30deg;
+  }
+}
+
+@keyframes tasto-premuto {
+  0%, 6%, 100% { translate: 0 0; box-shadow: 0 0.12em 0 var(--inchiostro); }
+  3% { translate: 0 0.1em; box-shadow: 0 0.02em 0 var(--inchiostro); }
+}
+
+.eroe-sottotitolo {
+  font-family: var(--font-titoli);
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
+  font-weight: 500;
+}
+
+.eroe-mascotte {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-inline-size: 40rem;
+  margin-block-start: 1rem;
+  text-align: start;
+
+  & .mascotte {
+    inline-size: clamp(6rem, 18vw, 9rem);
+    flex: none;
+  }
+
+  & .fumetto {
+    animation: comparsa 600ms var(--molla) 900ms both;
+  }
+}
+
+@keyframes comparsa {
+  from { opacity: 0; scale: 0.6; translate: -1rem 0; }
+}
+
+/* Carte delle tre aree */
+.aree {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: calc(var(--spazio) * 1.2);
+  padding: 0;
+  margin-block: 2rem 3rem;
+  list-style: none;
+}
+
+.area {
+  container-type: inline-size;
+  animation: carta-entra 700ms var(--molla) both;
+  animation-delay: calc(400ms + var(--i) * 150ms);
+}
+
+@keyframes carta-entra {
+  from {
+    opacity: 0;
+    translate: 0 3rem;
+    rotate: 4deg;
+  }
+}
+
+.area-link {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.75rem;
+  block-size: 100%;
+  padding: 1.5rem;
+  text-decoration: none;
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--bianco) 45%, transparent) 0 30%, transparent 31%),
+    var(--tinta);
+  border: var(--bordo);
+  border-radius: calc(var(--raggio) * 1.3);
+  box-shadow: var(--ombra);
+  transition: transform 300ms var(--molla), box-shadow 300ms;
+
+  &:hover,
+  &:focus-visible {
+    transform: translate(-4px, -6px) rotate(-1.2deg);
+    box-shadow: 0.7rem 0.8rem 0 var(--inchiostro);
+  }
+
+  .area:nth-child(even) &:hover {
+    transform: translate(-4px, -6px) rotate(1.2deg);
+  }
+}
+
+.area-numero {
+  position: absolute;
+  inset-block-start: -1rem;
+  inset-inline-end: 1.2rem;
+  display: grid;
+  place-items: center;
+  inline-size: 2.6rem;
+  aspect-ratio: 1;
+  font-family: var(--font-titoli);
+  font-weight: 700;
+  font-size: 1.4rem;
+  background: var(--bianco);
+  border: var(--bordo);
+  border-radius: 50%;
+  box-shadow: var(--ombra-piccola);
+}
+
+.area-icona {
+  inline-size: 6rem;
+}
+
+.area-titolo {
+  font-size: clamp(1.4rem, 7cqi, 1.9rem);
+}
+
+.area-piede {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.area-azione {
+  font-family: var(--font-titoli);
+  font-weight: 700;
+
+  & span {
+    display: inline-block;
+    transition: translate 300ms var(--molla);
+  }
+
+  .area-link:hover & span {
+    translate: 0.4rem 0;
+  }
+}
+
+/* Consigli, con animazione guidata dallo scroll */
+.consigli {
+  max-inline-size: 48rem;
+  margin-inline: auto;
+  padding: 1.5rem;
+  background: var(--bianco);
+  border: var(--bordo);
+  border-radius: var(--raggio);
+  box-shadow: var(--ombra);
+
+  & h2 {
+    margin-block-end: 1rem;
+    text-align: center;
+  }
+
+  & ol {
+    display: grid;
+    gap: 0.8rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  & li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+}
+
+.consiglio-icona {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 3rem;
+  aspect-ratio: 1;
+  font-size: 1.6rem;
+  background: var(--crema);
+  border: var(--bordo);
+  border-radius: 50%;
+}
+
+@supports (animation-timeline: view()) {
+  .consigli li {
+    animation: scivola-dentro linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+}
+
+@keyframes scivola-dentro {
+  from {
+    opacity: 0;
+    translate: -3rem 0;
+  }
+}

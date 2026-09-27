@@ -1,0 +1,52 @@
+---
+layout: layouts/base.vto
+---
+<section class="eroe">
+  <div class="lettere-volanti" aria-hidden="true">
+    {{ for i, l of "ASDFJKLÒQWERTYÈ".split("") }}
+    <span style="--i: {{ i }}">{{ l }}</span>
+    {{ /for }}
+  </div>
+
+  <h1 class="titolo-tasti" aria-label="{{ titolo_grande }}">
+    {{ for i, parola of titolo_grande.split(" ") }}
+    <span class="titolo-parola" aria-hidden="true">
+      {{ for j, lettera of parola.split("") }}
+      <span class="tasto-titolo" style="--i: {{ i * 6 + j }}">{{ lettera }}</span>
+      {{ /for }}
+    </span>
+    {{ /for }}
+  </h1>
+  <p class="eroe-sottotitolo">{{ sottotitolo }}</p>
+
+  <div class="eroe-mascotte">
+    {{ include "partials/mascotte.vto" { classe: "mascotte--grande mascotte--saluta" } }}
+    <div class="fumetto fumetto--sinistra">{{ fumetto |> md(true) }}</div>
+  </div>
+</section>
+
+<ul class="aree" role="list">
+  {{ for i, area of aree }}
+  <li class="area" data-colore="{{ area.colore }}" style="--i: {{ i }}">
+    <a class="area-link" href="{{ area.url }}">
+      <span class="area-numero" aria-hidden="true">{{ i + 1 }}</span>
+      <span class="area-icona" aria-hidden="true">{{ include "illustrazioni/icona-" + area.nome + ".vto" }}</span>
+      <h2 class="area-titolo" style="view-transition-name: titolo-{{ area.nome }}">{{ area.titolo }}</h2>
+      <p class="area-testo">{{ area.testo }}</p>
+      <span class="area-piede">
+        <span class="etichetta">⏱ {{ area.durata }}</span>
+        <span class="area-azione">{{ area.azione }} <span aria-hidden="true">→</span></span>
+      </span>
+    </a>
+  </li>
+  {{ /for }}
+</ul>
+
+<section class="consigli">
+  <h2>{{ consigli_titolo }}</h2>
+  <ol role="list">
+    {{ for i, c of consigli }}
+    <li style="--i: {{ i }}"><span class="consiglio-icona" aria-hidden="true">{{ c.icona }}</span> {{ c.testo }}</li>
+    {{ /for }}
+  </ol>
+</section>

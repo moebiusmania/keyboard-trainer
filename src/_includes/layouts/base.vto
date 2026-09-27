@@ -1,0 +1,56 @@
+{{ set ui = search.page("id=interfaccia") }}
+<!doctype html>
+<html lang="{{ lang }}" data-area="{{ nome_area || 'casa' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if title == ui.sito }}{{ ui.sito }} · {{ ui.descrizione }}{{ else }}{{ title }} · {{ ui.sito }}{{ /if }}</title>
+  <meta name="description" content="{{ ui.descrizione }}">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=andika:400,700|fredoka:400,500,600,700&display=swap">
+  <link rel="stylesheet" href="/styles/main.css">
+  <script>
+    try { if (JSON.parse(localStorage.getItem("dita-magiche:audio")) === false) document.documentElement.dataset.audio = "spento"; } catch {}
+  </script>
+  <script type="module" src="/js/comune.js"></script>
+  {{ if script }}<script type="module" src="{{ script }}"></script>{{ /if }}
+</head>
+<body>
+  <a class="salta" href="#contenuto">{{ ui.salta_al_contenuto }}</a>
+  <header class="testata">
+    <a class="logo" href="/" aria-label="{{ ui.sito }} – {{ ui.menu[0].testo }}">
+      {{ include "partials/mascotte.vto" { classe: "mascotte--logo" } }}
+      <span class="logo-testo">{{ ui.sito }}</span>
+    </a>
+    <nav class="menu" aria-label="Menu">
+      <ul>
+        {{ for voce of ui.menu }}
+        <li><a href="{{ voce.url }}"{{ if voce.url == url }} aria-current="page"{{ /if }}>{{ voce.testo }}</a></li>
+        {{ /for }}
+      </ul>
+    </nav>
+    <button class="bottone-audio" type="button" aria-pressed="true" aria-label="{{ ui.audio }}" title="{{ ui.audio }}">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path class="altoparlante" d="M5 12h6l7-6v20l-7-6H5z" />
+        <path class="onde" d="M22 11q4 5 0 10M25.5 7.5q7 8.5 0 17" />
+        <path class="muto" d="M22 12l8 8M30 12l-8 8" />
+      </svg>
+    </button>
+  </header>
+
+  <main id="contenuto" class="contenuto">
+    {{ content }}
+  </main>
+
+  <footer class="piede">
+    <p>{{ ui.piede }}</p>
+    <p class="piede-licenza">
+      {{ ui.licenza.autori }} ·
+      {{ ui.licenza.prima }} <a rel="license" href="{{ ui.licenza.url }}">{{ ui.licenza.nome }}</a>:
+      {{ ui.licenza.dopo }}
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+@property --giro {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --progresso {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  /* Palette da infografica: colori pieni, contorno scuro */
+  --inchiostro: oklch(27% 0.05 265);
+  --carta: oklch(97.5% 0.02 85);
+  --crema: oklch(93% 0.05 85);
+  --bianco: oklch(100% 0 0);
+  --grigio: oklch(78% 0.02 265);
+  --giallo: oklch(88% 0.16 92);
+  --arancio: oklch(78% 0.15 55);
+  --rosa: oklch(76% 0.14 355);
+  --viola: oklch(70% 0.14 300);
+  --blu: oklch(72% 0.12 245);
+  --azzurro: oklch(86% 0.08 220);
+  --verde: oklch(80% 0.16 145);
+  --verde-scuro: oklch(62% 0.13 150);
+  --rosso: oklch(64% 0.21 25);
+  --pelle: oklch(88% 0.05 60);
+
+  /* Colori delle dita (uguali per le due mani) */
+  --dito-5: var(--rosa);
+  --dito-4: var(--viola);
+  --dito-3: var(--blu);
+  --dito-2: var(--verde);
+  --dito-1: var(--giallo);
+
+  --tinta: var(--giallo);
+
+  --font-titoli: "Fredoka", "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --font-testo: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-lettere: "Andika", "Fredoka", system-ui, sans-serif;
+
+  --bordo-spessore: 3px;
+  --bordo: var(--bordo-spessore) solid var(--inchiostro);
+  --raggio: 1.25rem;
+  --raggio-piccolo: 0.7rem;
+  --ombra: 0.3rem 0.35rem 0 var(--inchiostro);
+  --ombra-piccola: 0.15rem 0.2rem 0 var(--inchiostro);
+
+  --molla: cubic-bezier(0.3, 1.6, 0.5, 1);
+  --morbido: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --spazio: clamp(1rem, 2.5vw, 2rem);
+  --larghezza: 72rem;
+}
+
+/* Ogni elemento con data-colore imposta la sua tinta */
+[data-colore="giallo"] { --tinta: var(--giallo); }
+[data-colore="arancio"] { --tinta: var(--arancio); }
+[data-colore="rosa"] { --tinta: var(--rosa); }
+[data-colore="viola"] { --tinta: var(--viola); }
+[data-colore="blu"] { --tinta: var(--blu); }
+[data-colore="azzurro"] { --tinta: var(--azzurro); }
+[data-colore="verde"] { --tinta: var(--verde); }

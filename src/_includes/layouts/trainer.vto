@@ -1,0 +1,39 @@
+---
+layout: layouts/base.vto
+script: /js/trainer/app.js
+---
+{{ set ui = search.page("id=interfaccia") }}
+{{ set lezioni = search.pages("tipo=" + collezione, "ordine") }}
+<section class="trainer" data-modalita="{{ modalita }}" data-colore="{{ colore }}">
+  <header class="pagina-testa">
+    <h1 style="view-transition-name: titolo-{{ nome_area }}">{{ title }}</h1>
+    <div class="pagina-intro">{{ content }}</div>
+  </header>
+
+  <p class="avviso-tastiera">{{ ui.serve_tastiera }}</p>
+
+  <div id="app" class="app">
+    <noscript><p class="fumetto">JavaScript è necessario per giocare.</p></noscript>
+  </div>
+
+  <template id="tpl-mascotte">{{ include "partials/mascotte.vto" { classe: "mascotte--palco" } }}</template>
+  {{ for l of lezioni }}
+  <template data-intro="{{ l.ordine }}">{{ l.content |> md }}</template>
+  {{ /for }}
+  <script type="application/json" id="dati-trainer">{{ {
+    modalita,
+    area: nome_area,
+    testi,
+    dita: ui.dita,
+    lezioni: lezioni.map((l) => ({
+      ordine: l.ordine,
+      titolo: l.title,
+      emoji: l.emoji,
+      nuovi_tasti: l.nuovi_tasti,
+      obiettivo: l.obiettivo,
+      stelle: l.stelle,
+      finale: l.finale,
+      passi: l.passi,
+    })),
+  } |> json }}</script>
+</section>

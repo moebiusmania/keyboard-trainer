@@ -1,0 +1,208 @@
+/* ---------- Transizioni tra le pagine (View Transitions cross-document) ---------- */
+@view-transition {
+  navigation: auto;
+}
+
+.testata {
+  view-transition-name: testata;
+}
+
+.piede {
+  view-transition-name: piede;
+}
+
+::view-transition-old(root) {
+  animation: 280ms ease-in both pagina-esce;
+}
+
+::view-transition-new(root) {
+  animation: 520ms var(--molla) both pagina-entra;
+}
+
+::view-transition-group(*) {
+  animation-duration: 480ms;
+  animation-timing-function: var(--morbido);
+}
+
+@keyframes pagina-esce {
+  to {
+    opacity: 0;
+    transform: translateY(-1.5rem) scale(0.97) rotate(-0.6deg);
+  }
+}
+
+@keyframes pagina-entra {
+  from {
+    opacity: 0;
+    transform: translateY(3rem) scale(0.96) rotate(0.8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ---------- Struttura ---------- */
+.salta {
+  position: absolute;
+  inset-block-start: -10rem;
+  inset-inline-start: 1rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--giallo);
+  border: var(--bordo);
+  border-radius: var(--raggio-piccolo);
+
+  &:focus {
+    inset-block-start: 1rem;
+  }
+}
+
+.testata {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem var(--spazio);
+  background: color-mix(in oklch, var(--carta) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-block-end: var(--bordo);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--font-titoli);
+  font-weight: 700;
+  font-size: 1.35rem;
+
+  & .mascotte {
+    inline-size: 2.8rem;
+    view-transition-name: mascotte-logo;
+  }
+
+  &:hover .mascotte {
+    animation: saltello 500ms var(--molla);
+  }
+}
+
+.menu {
+  margin-inline-start: auto;
+
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  & a {
+    display: block;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    border: var(--bordo-spessore) solid transparent;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 200ms, border-color 200ms, transform 200ms var(--molla);
+
+    &:hover {
+      background: var(--crema);
+      transform: translateY(-2px) rotate(-2deg);
+    }
+
+    &[aria-current="page"] {
+      background: var(--tinta-area, var(--giallo));
+      border-color: var(--inchiostro);
+      box-shadow: var(--ombra-piccola);
+    }
+  }
+}
+
+[data-area="storia"] { --tinta-area: var(--blu); }
+[data-area="allenamento"] { --tinta-area: var(--giallo); }
+[data-area="sfida"] { --tinta-area: var(--rosa); }
+
+.bottone-audio {
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  aspect-ratio: 1;
+  flex: none;
+  background: var(--bianco);
+  border: var(--bordo);
+  border-radius: 50%;
+  box-shadow: var(--ombra-piccola);
+  transition: transform 200ms var(--molla);
+
+  &:hover {
+    transform: scale(1.1) rotate(-6deg);
+  }
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+
+  & svg {
+    inline-size: 1.6rem;
+    fill: none;
+    stroke: var(--inchiostro);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  & .altoparlante {
+    fill: var(--giallo);
+  }
+
+  & .muto {
+    display: none;
+  }
+
+  [data-audio="spento"] & {
+    & .onde { display: none; }
+    & .muto { display: block; stroke: var(--rosso); }
+    & .altoparlante { fill: var(--grigio); }
+  }
+}
+
+.contenuto {
+  inline-size: min(100% - 2 * var(--spazio), var(--larghezza));
+  margin-inline: auto;
+  padding-block: var(--spazio) calc(var(--spazio) * 2);
+}
+
+.piede {
+  padding: 1rem var(--spazio);
+  text-align: center;
+  font-size: 0.9rem;
+  border-block-start: var(--bordo);
+  background: var(--crema);
+
+  & .piede-licenza {
+    margin-block-start: 0.4rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+}
+
+@media (width < 40rem) {
+  .logo-testo {
+    display: none;
+  }
+
+  .menu a {
+    padding-inline: 0.6rem;
+    font-size: 0.95rem;
+  }
+}

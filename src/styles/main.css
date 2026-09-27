@@ -1,0 +1,15 @@
+/* Dita Magiche – foglio di stile principale.
+   CSS vanilla moderno: cascade layers, nesting, oklch, container queries,
+   :has(), @property, @starting-style e View Transitions. */
+@layer token, base, layout, componenti, pagine, utilita;
+
+@import url("token.css") layer(token);
+@import url("base.css") layer(base);
+@import url("layout.css") layer(layout);
+@import url("componenti.css") layer(componenti);
+@import url("illustrazioni.css") layer(componenti);
+@import url("home.css") layer(pagine);
+@import url("storia.css") layer(pagine);
+@import url("trainer.css") layer(pagine);
+@import url("tastiera.css") layer(pagine);
+@import url("utilita.css") layer(utilita);

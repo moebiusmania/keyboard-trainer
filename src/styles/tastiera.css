@@ -1,0 +1,191 @@
+/* ---------- Tastiera sullo schermo ---------- */
+.tastiera {
+  --u: calc((100cqi - 1.2rem) / 15.4);
+  display: grid;
+  gap: calc(var(--u) * 0.1);
+  padding: 0.6rem;
+  background: var(--inchiostro);
+  border-radius: calc(var(--u) * 0.45);
+  box-shadow: 0 0.4rem 0 color-mix(in oklch, var(--inchiostro), black 30%);
+  font-family: var(--font-lettere);
+  user-select: none;
+}
+
+.strumenti-tastiera {
+  container-type: inline-size;
+}
+
+.tastiera-riga {
+  display: flex;
+  gap: calc(var(--u) * 0.1);
+}
+
+.tasto {
+  --l: 1;
+  --tinta-dito: var(--carta);
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: var(--l) 1 0;
+  block-size: calc(var(--u) * 0.95);
+  font-size: calc(var(--u) * 0.42);
+  font-weight: 700;
+  line-height: 1;
+  background: color-mix(in oklch, var(--tinta-dito) 38%, var(--carta));
+  border-radius: calc(var(--u) * 0.16);
+  box-shadow: inset 0 calc(var(--u) * -0.08) 0 color-mix(in oklch, var(--tinta-dito), var(--inchiostro) 30%);
+  transition: background 200ms, translate 120ms, box-shadow 120ms;
+
+  &[data-dito$="5"] { --tinta-dito: var(--dito-5); }
+  &[data-dito$="4"] { --tinta-dito: var(--dito-4); }
+  &[data-dito$="3"] { --tinta-dito: var(--dito-3); }
+  &[data-dito$="2"] { --tinta-dito: var(--dito-2); }
+  &[data-dito$="1"] { --tinta-dito: var(--dito-1); }
+}
+
+.tasto--speciale {
+  font-family: var(--font-testo);
+  font-size: calc(var(--u) * 0.32);
+  font-weight: 500;
+}
+
+.tasto--doppio {
+  grid-template-rows: 1fr 1fr;
+  font-size: calc(var(--u) * 0.32);
+
+  & .su { align-self: end; opacity: 0.6; }
+  & .giu { align-self: start; }
+}
+
+/* Il rilievo di F e J */
+.tasto--rilievo::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 16%;
+  inline-size: 32%;
+  block-size: calc(var(--u) * 0.06);
+  min-block-size: 2px;
+  background: var(--inchiostro);
+  border-radius: 2px;
+}
+
+/* Tasto da premere */
+.tasto.prossimo {
+  z-index: 1;
+  background: var(--tinta-dito);
+  outline: calc(var(--u) * 0.08) solid var(--bianco);
+  box-shadow: 0 0 0 calc(var(--u) * 0.14) var(--tinta-dito), 0 0 calc(var(--u) * 0.6) var(--tinta-dito);
+  animation: pulsa-tasto 1s ease-in-out infinite;
+}
+
+.tasto.mostrato {
+  z-index: 1;
+  background: var(--tinta-dito);
+  outline: calc(var(--u) * 0.06) solid var(--bianco);
+  animation: saltella-tasto 1.4s var(--molla) infinite;
+}
+
+.tasto.giusto {
+  animation: tasto-giusto 250ms ease-out;
+}
+
+.tasto.sbagliato {
+  animation: tasto-sbagliato 350ms ease-out;
+}
+
+@keyframes pulsa-tasto {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.12; }
+}
+
+@keyframes saltella-tasto {
+  0%, 100% { translate: 0 0; }
+  30% { translate: 0 -18%; }
+}
+
+@keyframes tasto-giusto {
+  from { translate: 0 12%; background: var(--verde); box-shadow: none; }
+}
+
+@keyframes tasto-sbagliato {
+  0% { background: var(--rosso); }
+  25% { translate: -8% 0; }
+  75% { translate: 8% 0; }
+}
+
+/* ---------- Manine ---------- */
+.mani {
+  display: grid;
+  justify-items: center;
+  gap: 0.3rem;
+
+  & svg {
+    inline-size: min(100%, 26rem);
+    overflow: visible;
+  }
+}
+
+.mano :is(.palmo, .dito-forma) {
+  stroke: var(--inchiostro);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+
+.palmo {
+  fill: var(--pelle);
+}
+
+.palmo-segno {
+  fill: none;
+  stroke: color-mix(in oklch, var(--inchiostro) 30%, transparent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.dito {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: translate 250ms var(--molla);
+
+  & .dito-forma {
+    fill: color-mix(in oklch, var(--colore) 45%, var(--pelle));
+    transition: fill 250ms;
+  }
+
+  & .dito-unghia {
+    fill: color-mix(in oklch, var(--bianco) 70%, transparent);
+  }
+}
+
+.mani.in-uso .dito:not(.attivo) .dito-forma {
+  fill: var(--pelle);
+}
+
+.dito.attivo {
+  translate: 0 -8px;
+  animation: dito-picchietta 700ms ease-in-out infinite;
+
+  & .dito-forma {
+    fill: var(--colore);
+    stroke-width: 4.5;
+  }
+}
+
+@keyframes dito-picchietta {
+  0%, 100% { translate: 0 -8px; }
+  50% { translate: 0 2px; }
+}
+
+.mani-didascalia {
+  min-block-size: 1.6em;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-align: center;
+
+  &:not(:empty) {
+    padding: 0.1rem 0.9rem;
+    background: var(--bianco);
+    border: 2px solid var(--inchiostro);
+    border-radius: 999px;
+  }
+}
