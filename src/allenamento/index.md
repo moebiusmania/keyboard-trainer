@@ -54,7 +54,7 @@ testi:
     apri: Il tuo distintivo
     titolo: Distintivo conquistato!
     testo: "Hai completato tutto l'allenamento. Ecco il tuo distintivo speciale, {nome}!"
-    intestazione: DITA MAGICHE
+    intestazione: TASTO DOPO TASTO
     conferito: "Allenamento completato da"
     senza_nome: una piccola stella
     scarica: Scarica il distintivo
@@ -62,7 +62,7 @@ testi:
     chiudi: Chiudi
     sfida_invito: Vuoi continuare? Prova la grande sfida!
     sfida_url: /sfida/
-    nome_file: distintivo-dita-magiche
+    nome_file: distintivo-tasto-dopo-tasto
     animali:
       - emoji: "🐙"
         titolo: Polpo dalle Otto Dita

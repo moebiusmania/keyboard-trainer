@@ -1,14 +1,14 @@
-# Dita Magiche ⌨️
+# Tasto dopo tasto ⌨️
 
 <p align="center">
-  <img src="docs/tastino.svg" width="180" alt="Tastino, la mascotte di Dita Magiche: un tasto giallo e arancione che sorride e saluta">
+  <img src="docs/tastino.svg" width="180" alt="Tastino, la mascotte di Tasto dopo tasto: un tasto giallo e arancione che sorride e saluta">
 </p>
 
 Un allenatore di tastiera in italiano per bambine e bambini di 7–9 anni.
 Si impara a scrivere con dieci dita giocando, guidati da **Tastino**, il tasto più simpatico del mondo.
 È un sito statico costruito con [Deno](https://deno.com), [Lume](https://lume.land) e CSS vanilla: funziona nel browser, senza account e senza server.
 
-> **Come è nato questo progetto.** Dita Magiche è stato sviluppato con l'aiuto di strumenti di intelligenza artificiale, ma è stato ideato e revisionato da due persone: una che sviluppa software, per la parte tecnica, e una che insegna a scuola, per i contenuti, il linguaggio e il percorso didattico.
+> **Come è nato questo progetto.** Tasto dopo tasto è stato sviluppato con l'aiuto di strumenti di intelligenza artificiale, ma è stato ideato e revisionato da due persone: una che sviluppa software, per la parte tecnica, e una che insegna a scuola, per i contenuti, il linguaggio e il percorso didattico.
 
 ## Indice
 
@@ -163,6 +163,6 @@ Progressi, nome e record restano nel browser (`localStorage`). Non c'è nessun s
 
 ## Licenza
 
-Codice e contenuti sono distribuiti con la licenza [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it): puoi usare, copiare, ridistribuire e modificare Dita Magiche liberamente, citando gli autori, a patto che il risultato resti gratuito e con la stessa licenza. Non è permesso usarlo per creare prodotti o materiali a pagamento.
+Codice e contenuti sono distribuiti con la licenza [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it): puoi usare, copiare, ridistribuire e modificare Tasto dopo tasto liberamente, citando gli autori, a patto che il risultato resti gratuito e con la stessa licenza. Non è permesso usarlo per creare prodotti o materiali a pagamento.
 
 Il riassunto in italiano è in [`LICENZA.md`](LICENZA.md), il testo legale completo in [`LICENSE`](LICENSE).

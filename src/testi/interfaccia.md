@@ -1,11 +1,11 @@
 ---
 id: interfaccia
-sito: Dita Magiche
+sito: Tasto dopo tasto
 descrizione: Impara a usare la tastiera giocando, con Tastino!
 mascotte: Tastino
 piede: Fatto con 💛 per piccole dita curiose.
 licenza:
-  autori: © 2026 gli autori di Dita Magiche
+  autori: © 2026 gli autori di Tasto dopo tasto
   prima: Codice e contenuti con licenza
   nome: CC BY-NC-SA 4.0
   url: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it

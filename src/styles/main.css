@@ -1,4 +1,4 @@
-/* Dita Magiche – foglio di stile principale.
+/* Tasto dopo tasto – foglio di stile principale.
    CSS vanilla moderno: cascade layers, nesting, oklch, container queries,
    :has(), @property, @starting-style e View Transitions. */
 @layer token, base, layout, componenti, pagine, utilita;

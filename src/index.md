@@ -1,7 +1,7 @@
 ---
 layout: layouts/home.vto
-title: Dita Magiche
-titolo_grande: Dita Magiche
+title: Tasto dopo tasto
+titolo_grande: Tasto dopo tasto
 sottotitolo: Impara la tastiera giocando!
 fumetto: "Ciao! Io sono **Tastino**, il tasto più simpatico del mondo. Vuoi diventare un mago della tastiera? Scegli da dove partire!"
 aree:

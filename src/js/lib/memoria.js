@@ -1,6 +1,6 @@
 // Piccolo involucro attorno a localStorage: se non è disponibile
 // (navigazione privata, dati bloccati) il gioco funziona lo stesso.
-const PREFISSO = "dita-magiche:";
+const PREFISSO = "tasto-dopo-tasto:";
 
 export function leggi(chiave, predefinito = null) {
   try {
