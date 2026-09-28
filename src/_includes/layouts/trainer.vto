@@ -4,6 +4,12 @@ script: /js/trainer/app.js
 ---
 {{ set ui = search.page("id=interfaccia") }}
 {{ set lezioni = search.pages("tipo=" + collezione, "ordine") }}
+{{# Il link alla sfida viene scritto dal JS, quindi il percorso base va aggiunto qui #}}
+{{ set datiTesti = testi }}
+{{ if testi.badge?.sfida_url }}
+{{ set sfidaUrl = testi.badge.sfida_url |> url }}
+{{ set datiTesti = { ...testi, badge: { ...testi.badge, sfida_url: sfidaUrl } } }}
+{{ /if }}
 <section class="trainer" data-modalita="{{ modalita }}" data-colore="{{ colore }}">
   <header class="pagina-testa">
     <h1 style="view-transition-name: titolo-{{ nome_area }}">{{ title }}</h1>
@@ -23,7 +29,7 @@ script: /js/trainer/app.js
   <script type="application/json" id="dati-trainer">{{ {
     modalita,
     area: nome_area,
-    testi,
+    testi: datiTesti,
     dita: ui.dita,
     lezioni: lezioni.map((l) => ({
       ordine: l.ordine,

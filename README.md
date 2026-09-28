@@ -75,7 +75,13 @@ deno task dev:host  # come serve, ma raggiungibile da altri dispositivi in rete 
 deno task build     # genera il sito statico in _site/
 ```
 
-La cartella `_site/` si può pubblicare così com'è su qualsiasi hosting statico (GitHub Pages, Netlify, un server della scuola...). Prima di pubblicare, aggiorna `location` in `_config.ts` con l'indirizzo vero del sito: serve anche per i link di anteprima quando il sito viene condiviso sui social o nelle chat.
+La cartella `_site/` si può pubblicare così com'è su qualsiasi hosting statico (GitHub Pages, Netlify, un server della scuola...). Prima di pubblicare, indica l'indirizzo vero del sito, anche se è in una sottocartella: serve per i link interni e per le anteprime quando il sito viene condiviso sui social o nelle chat.
+
+```sh
+deno task build --location https://esempio.it/tastiera/
+```
+
+Su GitHub Pages ci pensa il workflow `.github/workflows/pages.yml`: a ogni push su `main` genera il sito con l'indirizzo giusto e lo pubblica.
 
 ## Struttura del progetto
 

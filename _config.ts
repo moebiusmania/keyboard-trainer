@@ -1,4 +1,5 @@
 import lume from "lume/mod.ts";
+import basePath from "lume/plugins/base_path.ts";
 
 const site = lume({
   src: "./src",
@@ -10,6 +11,10 @@ site.add("styles");
 site.add("js");
 site.add("favicon.svg");
 site.add("anteprima-social.png");
+
+// Se il sito è pubblicato in una sottocartella (es. GitHub Pages),
+// aggiunge il percorso di `location` ai link assoluti dell'HTML
+site.use(basePath());
 
 // Serializza dati per <script type="application/json"> senza rompere l'HTML
 site.filter("json", (value: unknown) =>
