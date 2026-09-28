@@ -1,6 +1,7 @@
 ---
 layout: layouts/trainer.vto
 title: Allenamento
+descrizione: "Nove lezioni facili facili per imparare a mettere le dita al posto giusto. Alla fine vinci un distintivo!"
 nome_area: allenamento
 modalita: base
 collezione: lezione

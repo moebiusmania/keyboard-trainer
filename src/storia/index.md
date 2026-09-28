@@ -1,6 +1,7 @@
 ---
 layout: layouts/storia.vto
 title: C'era una volta la tastiera
+descrizione: "Scopri come si scriveva prima dei computer e come è nata la tastiera."
 nome_area: storia
 colore: blu
 testi:

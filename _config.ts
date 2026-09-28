@@ -9,6 +9,7 @@ const site = lume({
 site.add("styles");
 site.add("js");
 site.add("favicon.svg");
+site.add("anteprima-social.png");
 
 // Serializza dati per <script type="application/json"> senza rompere l'HTML
 site.filter("json", (value: unknown) =>

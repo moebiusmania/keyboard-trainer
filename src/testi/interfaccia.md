@@ -3,6 +3,9 @@ id: interfaccia
 sito: Tasto dopo tasto
 descrizione: Impara a usare la tastiera giocando, con Tastino!
 mascotte: Tastino
+anteprima:
+  immagine: /anteprima-social.png
+  alt: "Tastino, un tasto giallo e arancione che sorride, accanto alla scritta «Tasto dopo tasto, impara la tastiera giocando!» e ai tasti colorati della riga di casa."
 piede: Fatto con 💛 per piccole dita curiose.
 licenza:
   autori: © 2026 gli autori di Tasto dopo tasto

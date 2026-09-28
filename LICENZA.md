@@ -11,7 +11,7 @@ Tutto il progetto, **codice e contenuti**, è distribuito con la licenza
 | Parte | Dove si trova |
 | --- | --- |
 | **Codice** | `_config.ts`, `deno.json`, `src/_includes/layouts/`, `src/_includes/partials/`, `src/js/`, `src/styles/` |
-| **Contenuti** | testi, lezioni, livelli e slide (`src/**/*.md`, `src/**/_data.yml`), illustrazioni e mascotte (`src/_includes/illustrazioni/`, `src/_includes/partials/mascotte.vto`, `src/favicon.svg`, `docs/`), il README |
+| **Contenuti** | testi, lezioni, livelli e slide (`src/**/*.md`, `src/**/_data.yml`), illustrazioni e mascotte (`src/_includes/illustrazioni/`, `src/_includes/partials/mascotte.vto`, `src/favicon.svg`, `src/anteprima-social.png`, `docs/`), il README |
 
 ## In breve
 

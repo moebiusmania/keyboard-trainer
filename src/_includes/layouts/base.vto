@@ -4,8 +4,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ set descrizionePagina = descrizione || ui.descrizione }}
   <title>{{ if title == ui.sito }}{{ ui.sito }} · {{ ui.descrizione }}{{ else }}{{ title }} · {{ ui.sito }}{{ /if }}</title>
-  <meta name="description" content="{{ ui.descrizione }}">
+  <meta name="description" content="{{ descrizionePagina |> escape }}">
+  <link rel="canonical" href="{{ url |> url(true) }}">
+
+  <!-- Anteprima quando il link viene condiviso (Open Graph e X/Twitter) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="{{ ui.sito }}">
+  <meta property="og:title" content="{{ title |> escape }}">
+  <meta property="og:description" content="{{ descrizionePagina |> escape }}">
+  <meta property="og:url" content="{{ url |> url(true) }}">
+  <meta property="og:image" content="{{ ui.anteprima.immagine |> url(true) }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ ui.anteprima.alt |> escape }}">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.bunny.net">

@@ -75,7 +75,7 @@ deno task dev:host  # come serve, ma raggiungibile da altri dispositivi in rete 
 deno task build     # genera il sito statico in _site/
 ```
 
-La cartella `_site/` si può pubblicare così com'è su qualsiasi hosting statico (GitHub Pages, Netlify, un server della scuola...). Prima di pubblicare, aggiorna `location` in `_config.ts` con l'indirizzo vero del sito.
+La cartella `_site/` si può pubblicare così com'è su qualsiasi hosting statico (GitHub Pages, Netlify, un server della scuola...). Prima di pubblicare, aggiorna `location` in `_config.ts` con l'indirizzo vero del sito: serve anche per i link di anteprima quando il sito viene condiviso sui social o nelle chat.
 
 ## Struttura del progetto
 
@@ -109,8 +109,8 @@ Tutti i testi stanno in file Markdown con frontmatter YAML dentro `src/`, così 
 | File | Contenuto |
 | --- | --- |
 | `src/index.md` | Home: titolo, fumetto di Tastino, le tre aree, le regole d'oro |
-| `src/testi/interfaccia.md` | Testi comuni: menu, piè di pagina, nomi delle dita |
-| `src/storia/index.md` | Testi dei bottoni della presentazione |
+| `src/testi/interfaccia.md` | Testi comuni: menu, piè di pagina, nomi delle dita, immagine e testo alternativo dell'anteprima social |
+| `src/storia/index.md` | Descrizione della pagina e testi dei bottoni della presentazione |
 | `src/storia/slide/*.md` | Una slide per file (`ordine`, `anno`, `illustrazione`, `colore`, `curiosita` + testo) |
 | `src/allenamento/index.md` | Testi del trainer: messaggi, complimenti, distintivo e animali |
 | `src/allenamento/lezioni/*.md` | Una lezione per file |

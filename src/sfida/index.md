@@ -1,6 +1,7 @@
 ---
 layout: layouts/trainer.vto
 title: La grande sfida
+descrizione: "Hai già finito l'allenamento? Metti alla prova le tue dita, fai punti e batti i tuoi record!"
 nome_area: sfida
 modalita: sfida
 collezione: livello
