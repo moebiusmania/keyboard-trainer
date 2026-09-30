@@ -6,28 +6,28 @@ const site = lume({
   location: new URL("https://example.com/"),
 });
 
-// File statici: CSS vanilla e moduli JS nativi, copiati così come sono
+// Static files: vanilla CSS and native JS modules, copied as they are
 site.add("styles");
 site.add("js");
 site.add("favicon.svg");
-site.add("anteprima-social.png");
+site.add("social-preview.png");
 
-// Se il sito è pubblicato in una sottocartella (es. GitHub Pages),
-// aggiunge il percorso di `location` ai link assoluti dell'HTML
+// If the site is published in a subfolder (e.g. GitHub Pages),
+// prepends the `location` path to the absolute links in the HTML
 site.use(basePath());
 
-// Serializza dati per <script type="application/json"> senza rompere l'HTML
+// Serializes data for <script type="application/json"> without breaking the HTML
 site.filter("json", (value: unknown) =>
   JSON.stringify(value ?? null)
     .replaceAll("<", "\\u003c")
     .replaceAll(">", "\\u003e")
     .replaceAll("&", "\\u0026"));
 
-// I file di solo contenuto (slide, lezioni, livelli, testi dell'interfaccia)
-// sono pagine Markdown ricercabili con `search`, ma non vengono pubblicate.
+// Content-only files (slides, lessons, levels, interface texts)
+// are Markdown pages that `search` can find, but they are not published.
 site.process([".html"], (_pages, allPages) => {
   for (let i = allPages.length - 1; i >= 0; i--) {
-    if (allPages[i].data.soloContenuto) allPages.splice(i, 1);
+    if (allPages[i].data.contentOnly) allPages.splice(i, 1);
   }
 });
 

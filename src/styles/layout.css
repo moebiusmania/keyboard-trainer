@@ -1,37 +1,37 @@
-/* ---------- Transizioni tra le pagine (View Transitions cross-document) ---------- */
+/* ---------- Transitions between pages (cross-document View Transitions) ---------- */
 @view-transition {
   navigation: auto;
 }
 
-.testata {
-  view-transition-name: testata;
+.header {
+  view-transition-name: header;
 }
 
-.piede {
-  view-transition-name: piede;
+.footer {
+  view-transition-name: footer;
 }
 
 ::view-transition-old(root) {
-  animation: 280ms ease-in both pagina-esce;
+  animation: 280ms ease-in both page-exit;
 }
 
 ::view-transition-new(root) {
-  animation: 520ms var(--molla) both pagina-entra;
+  animation: 520ms var(--spring) both page-enter;
 }
 
 ::view-transition-group(*) {
   animation-duration: 480ms;
-  animation-timing-function: var(--morbido);
+  animation-timing-function: var(--smooth);
 }
 
-@keyframes pagina-esce {
+@keyframes page-exit {
   to {
     opacity: 0;
     transform: translateY(-1.5rem) scale(0.97) rotate(-0.6deg);
   }
 }
 
-@keyframes pagina-entra {
+@keyframes page-enter {
   from {
     opacity: 0;
     transform: translateY(3rem) scale(0.96) rotate(0.8deg);
@@ -46,33 +46,33 @@
   }
 }
 
-/* ---------- Struttura ---------- */
-.salta {
+/* ---------- Structure ---------- */
+.skip {
   position: absolute;
   inset-block-start: -10rem;
   inset-inline-start: 1rem;
   z-index: 100;
   padding: 0.5rem 1rem;
-  background: var(--giallo);
-  border: var(--bordo);
-  border-radius: var(--raggio-piccolo);
+  background: var(--yellow);
+  border: var(--border);
+  border-radius: var(--radius-small);
 
   &:focus {
     inset-block-start: 1rem;
   }
 }
 
-.testata {
+.header {
   position: sticky;
   inset-block-start: 0;
   z-index: 20;
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.5rem var(--spazio);
-  background: color-mix(in oklch, var(--carta) 88%, transparent);
+  padding: 0.5rem var(--space);
+  background: color-mix(in oklch, var(--paper) 88%, transparent);
   backdrop-filter: blur(8px);
-  border-block-end: var(--bordo);
+  border-block-end: var(--border);
 }
 
 .logo {
@@ -80,17 +80,17 @@
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  font-family: var(--font-titoli);
+  font-family: var(--font-headings);
   font-weight: 700;
   font-size: 1.35rem;
 
-  & .mascotte {
+  & .mascot {
     inline-size: 2.8rem;
-    view-transition-name: mascotte-logo;
+    view-transition-name: mascot-logo;
   }
 
-  &:hover .mascotte {
-    animation: saltello 500ms var(--molla);
+  &:hover .mascot {
+    animation: bounce 500ms var(--spring);
   }
 }
 
@@ -109,39 +109,39 @@
     display: block;
     padding: 0.3rem 0.9rem;
     border-radius: 999px;
-    border: var(--bordo-spessore) solid transparent;
+    border: var(--border-width) solid transparent;
     font-weight: 600;
     text-decoration: none;
-    transition: background 200ms, border-color 200ms, transform 200ms var(--molla);
+    transition: background 200ms, border-color 200ms, transform 200ms var(--spring);
 
     &:hover {
-      background: var(--crema);
+      background: var(--cream);
       transform: translateY(-2px) rotate(-2deg);
     }
 
     &[aria-current="page"] {
-      background: var(--tinta-area, var(--giallo));
-      border-color: var(--inchiostro);
-      box-shadow: var(--ombra-piccola);
+      background: var(--tint-area, var(--yellow));
+      border-color: var(--ink);
+      box-shadow: var(--shadow-small);
     }
   }
 }
 
-[data-area="storia"] { --tinta-area: var(--blu); }
-[data-area="allenamento"] { --tinta-area: var(--giallo); }
-[data-area="sfida"] { --tinta-area: var(--rosa); }
+[data-area="story"] { --tint-area: var(--blue); }
+[data-area="training"] { --tint-area: var(--yellow); }
+[data-area="challenge"] { --tint-area: var(--pink); }
 
-.bottone-audio {
+.audio-button {
   display: grid;
   place-items: center;
   inline-size: 2.75rem;
   aspect-ratio: 1;
   flex: none;
-  background: var(--bianco);
-  border: var(--bordo);
+  background: var(--white);
+  border: var(--border);
   border-radius: 50%;
-  box-shadow: var(--ombra-piccola);
-  transition: transform 200ms var(--molla);
+  box-shadow: var(--shadow-small);
+  transition: transform 200ms var(--spring);
 
   &:hover {
     transform: scale(1.1) rotate(-6deg);
@@ -155,41 +155,41 @@
   & svg {
     inline-size: 1.6rem;
     fill: none;
-    stroke: var(--inchiostro);
+    stroke: var(--ink);
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
 
-  & .altoparlante {
-    fill: var(--giallo);
+  & .speaker {
+    fill: var(--yellow);
   }
 
-  & .muto {
+  & .muted {
     display: none;
   }
 
-  [data-audio="spento"] & {
-    & .onde { display: none; }
-    & .muto { display: block; stroke: var(--rosso); }
-    & .altoparlante { fill: var(--grigio); }
+  [data-audio="off"] & {
+    & .waves { display: none; }
+    & .muted { display: block; stroke: var(--red); }
+    & .speaker { fill: var(--gray); }
   }
 }
 
-.contenuto {
-  inline-size: min(100% - 2 * var(--spazio), var(--larghezza));
+.content {
+  inline-size: min(100% - 2 * var(--space), var(--max-width));
   margin-inline: auto;
-  padding-block: var(--spazio) calc(var(--spazio) * 2);
+  padding-block: var(--space) calc(var(--space) * 2);
 }
 
-.piede {
-  padding: 1rem var(--spazio);
+.footer {
+  padding: 1rem var(--space);
   text-align: center;
   font-size: 0.9rem;
-  border-block-start: var(--bordo);
-  background: var(--crema);
+  border-block-start: var(--border);
+  background: var(--cream);
 
-  & .piede-licenza {
+  & .footer-license {
     margin-block-start: 0.4rem;
     font-size: 0.8rem;
     opacity: 0.8;
@@ -197,7 +197,7 @@
 }
 
 @media (width < 40rem) {
-  .logo-testo {
+  .logo-text {
     display: none;
   }
 

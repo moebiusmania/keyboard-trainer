@@ -1,0 +1,298 @@
+/* ---------- Story: slide presentation ---------- */
+.carousel {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.slides {
+  display: grid;
+  padding: 0;
+  list-style: none;
+  view-transition-name: slide;
+}
+
+.slide {
+  container-type: inline-size;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 18px, color-mix(in oklch, var(--white) 18%, transparent) 18px 36px),
+    var(--tint);
+  border: var(--border);
+  border-radius: calc(var(--radius) * 1.5);
+  box-shadow: 0.5rem 0.6rem 0 var(--ink);
+}
+
+
+/* The slide is a container: the illustration sits beside the text only if there is room */
+.slide-inner {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+
+  @container (width > 48rem) {
+    grid-template-columns: 1fr 1.1fr;
+  }
+}
+
+.slide-illustration {
+  padding: 0.5rem;
+
+  & .illu {
+    max-block-size: 22rem;
+    margin-inline: auto;
+  }
+}
+
+.slide-text {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: start;
+  padding: 1.5rem;
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+
+  & h2 {
+    font-size: clamp(1.6rem, 1.2rem + 2vw, 2.4rem);
+  }
+
+  & strong {
+    background: linear-gradient(transparent 55%, color-mix(in oklch, var(--tint) 80%, transparent) 55%);
+  }
+
+  & .button {
+    margin-block-start: 0.5rem;
+  }
+}
+
+.slide-body {
+  display: grid;
+  gap: 0.6em;
+}
+
+.slide-year {
+  padding: 0.1em 0.8em;
+  font-family: var(--font-headings);
+  font-weight: 700;
+  background: var(--tint);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  rotate: -3deg;
+}
+
+.fact {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.8rem 1rem;
+  font-size: 0.95em;
+  background: var(--white);
+  border: 2px dashed var(--ink);
+  border-radius: var(--radius-small);
+}
+
+.fact-icon {
+  font-size: 1.6rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Slide elements entering one after the other */
+.slide:not([hidden]) {
+  & .slide-year,
+  & h2,
+  & .slide-body,
+  & .fact,
+  & .button {
+    animation: rise-up 600ms var(--spring) both;
+  }
+
+  & h2 { animation-delay: 80ms; }
+  & .slide-body { animation-delay: 160ms; }
+  & .fact { animation-delay: 320ms; }
+  & .button { animation-delay: 450ms; }
+}
+
+@keyframes rise-up {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+}
+
+/* Navigation: arrows and timeline */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 3.6rem;
+  aspect-ratio: 1;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: var(--yellow);
+  border: var(--border);
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  transition: transform 200ms var(--spring), box-shadow 200ms, opacity 200ms;
+
+  &:hover:not(:disabled) {
+    transform: scale(1.1);
+  }
+
+  &:active:not(:disabled),
+  &.pressed {
+    transform: translate(0.3rem, 0.35rem);
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 0;
+  list-style: none;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    /* The line starts and ends at the center of the first and last dot */
+    inset-inline: calc(50% / var(--steps));
+    inset-block-start: 0.85rem;
+    block-size: 6px;
+    border-radius: 3px;
+    background: color-mix(in oklch, var(--ink) 20%, transparent);
+  }
+
+  &::after {
+    background: var(--ink);
+    inset-inline-end: auto;
+    inline-size: calc((100% - 100% / var(--steps)) * var(--progress));
+    transition: --progress 500ms var(--smooth);
+  }
+
+  /* Equal columns: the distance between dots does not depend on the label length */
+  & li {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    min-inline-size: 0;
+  }
+
+  & button {
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+    padding: 0;
+    background: none;
+    border: none;
+  }
+}
+
+.timeline-dot {
+  inline-size: 1.8rem;
+  aspect-ratio: 1;
+  background: var(--white);
+  border: var(--border);
+  border-radius: 50%;
+  transition: background 300ms, scale 300ms var(--spring);
+
+  button:hover & {
+    scale: 1.2;
+  }
+
+  :is([aria-current="step"], .visited) > & {
+    background: var(--tint);
+  }
+
+  [aria-current="step"] > & {
+    scale: 1.35;
+    box-shadow: 0 0 0 5px color-mix(in oklch, var(--tint) 45%, transparent);
+  }
+}
+
+.timeline-year {
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  [aria-current="step"] > & {
+    font-weight: 700;
+  }
+}
+
+@media (width < 44rem) {
+  .timeline-year {
+    display: none;
+  }
+
+  .timeline li:has([aria-current="step"]) .timeline-year {
+    display: block;
+    position: absolute;
+    inset-block-start: 2.3rem;
+    inset-inline-start: 50%;
+    translate: -50% 0;
+  }
+}
+
+.arrows-hint {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.8;
+
+  @media (pointer: coarse) {
+    display: none;
+  }
+}
+
+/* Transition between slides (same-document View Transitions) */
+html[data-direction="forward"]::view-transition-old(slide) {
+  animation: 350ms ease-in both slide-exit-left;
+}
+
+html[data-direction="forward"]::view-transition-new(slide) {
+  animation: 550ms var(--spring) both slide-enter-right;
+}
+
+html[data-direction="back"]::view-transition-old(slide) {
+  animation: 350ms ease-in both slide-exit-right;
+}
+
+html[data-direction="back"]::view-transition-new(slide) {
+  animation: 550ms var(--spring) both slide-enter-left;
+}
+
+html[data-direction]::view-transition-group(slide) {
+  animation-duration: 450ms;
+}
+
+@keyframes slide-exit-left {
+  to { opacity: 0; transform: translateX(-30%) rotate(-4deg) scale(0.9); }
+}
+
+@keyframes slide-enter-right {
+  from { opacity: 0; transform: translateX(40%) rotate(5deg) scale(0.9); }
+}
+
+@keyframes slide-exit-right {
+  to { opacity: 0; transform: translateX(30%) rotate(4deg) scale(0.9); }
+}
+
+@keyframes slide-enter-left {
+  from { opacity: 0; transform: translateX(-40%) rotate(-5deg) scale(0.9); }
+}

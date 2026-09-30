@@ -1,15 +1,15 @@
-/* Tasto dopo tasto – foglio di stile principale.
-   CSS vanilla moderno: cascade layers, nesting, oklch, container queries,
-   :has(), @property, @starting-style e View Transitions. */
-@layer token, base, layout, componenti, pagine, utilita;
+/* Tasto dopo tasto – main stylesheet.
+   Modern vanilla CSS: cascade layers, nesting, oklch, container queries,
+   :has(), @property, @starting-style and View Transitions. */
+@layer tokens, base, layout, components, pages, utilities;
 
-@import url("token.css") layer(token);
+@import url("tokens.css") layer(tokens);
 @import url("base.css") layer(base);
 @import url("layout.css") layer(layout);
-@import url("componenti.css") layer(componenti);
-@import url("illustrazioni.css") layer(componenti);
-@import url("home.css") layer(pagine);
-@import url("storia.css") layer(pagine);
-@import url("trainer.css") layer(pagine);
-@import url("tastiera.css") layer(pagine);
-@import url("utilita.css") layer(utilita);
+@import url("components.css") layer(components);
+@import url("illustrations.css") layer(components);
+@import url("home.css") layer(pages);
+@import url("story.css") layer(pages);
+@import url("trainer.css") layer(pages);
+@import url("keyboard.css") layer(pages);
+@import url("utilities.css") layer(utilities);
