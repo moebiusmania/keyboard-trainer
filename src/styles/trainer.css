@@ -315,7 +315,9 @@ html[data-direzione="indietro"]::view-transition-new(schermo) {
   &::after {
     content: "";
     position: absolute;
-    inset: -0.6rem;
+    /* Centrato su cerchio + ombra (che sporge in basso a destra), e sotto numero e spunta */
+    inset: -0.6rem -0.9rem -0.9rem -0.6rem;
+    z-index: -1;
     border: 3px dashed var(--inchiostro);
     border-radius: 50%;
     animation: gira 8s linear infinite;
