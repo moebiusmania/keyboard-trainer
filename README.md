@@ -92,19 +92,19 @@ Su GitHub Pages ci pensa il workflow `.github/workflows/pages.yml`: a ogni push 
 ├── docs/                 # immagini per questo README
 └── src/
     ├── index.md          # home
-    ├── storia/           # presentazione e slide
-    ├── allenamento/      # trainer e lezioni
-    ├── sfida/            # trainer e livelli
-    ├── testi/            # testi comuni dell'interfaccia
+    ├── story/            # presentazione e slide (pagina /storia/)
+    ├── training/         # trainer e lezioni (pagina /allenamento/)
+    ├── challenge/        # trainer e livelli (pagina /sfida/)
+    ├── texts/            # testi comuni dell'interfaccia
     ├── _includes/
-    │   ├── layouts/      # home, storia, trainer, base
+    │   ├── layouts/      # home, story, trainer, base
     │   ├── partials/     # mascotte
-    │   └── illustrazioni/# SVG delle slide e delle icone
+    │   └── illustrations/# SVG delle slide e delle icone
     ├── js/
-    │   ├── comune.js     # codice di tutte le pagine
-    │   ├── storia.js     # presentazione
+    │   ├── common.js     # codice di tutte le pagine
+    │   ├── story.js      # presentazione
     │   ├── trainer/      # motore di allenamento e sfida (input, punteggio)
-    │   └── lib/          # tastiera, mani, suoni, coriandoli, distintivo, memoria...
+    │   └── lib/          # tastiera, mani, suoni, coriandoli, distintivo, salvataggi...
     └── styles/           # CSS diviso per livelli (@layer)
 ```
 
@@ -112,48 +112,50 @@ Su GitHub Pages ci pensa il workflow `.github/workflows/pages.yml`: a ogni push 
 
 Tutti i testi stanno in file Markdown con frontmatter YAML dentro `src/`, così chi insegna può modificarli senza toccare il codice. Il codice sta in `_includes/`, `js/` e `styles/`.
 
+Nomi di file, cartelle, chiavi del frontmatter e codice sono in inglese; i testi che si leggono sul sito restano in italiano. Gli indirizzi delle pagine (`/storia/`, `/allenamento/`, `/sfida/`) sono fissati con `url` nel frontmatter dei rispettivi `index.md`.
+
 | File | Contenuto |
 | --- | --- |
 | `src/index.md` | Home: titolo, fumetto di Tastino, le tre aree, le regole d'oro |
-| `src/testi/interfaccia.md` | Testi comuni: menu, piè di pagina, nomi delle dita, immagine e testo alternativo dell'anteprima social |
-| `src/storia/index.md` | Descrizione della pagina e testi dei bottoni della presentazione |
-| `src/storia/slide/*.md` | Una slide per file (`ordine`, `anno`, `illustrazione`, `colore`, `curiosita` + testo) |
-| `src/allenamento/index.md` | Testi del trainer: messaggi, complimenti, distintivo e animali |
-| `src/allenamento/lezioni/*.md` | Una lezione per file |
-| `src/sfida/index.md` | Testi della sfida: punteggi, record, bacheca |
-| `src/sfida/livelli/*.md` | Un livello per file |
+| `src/texts/interface.md` | Testi comuni: menu, piè di pagina, nomi delle dita, immagine e testo alternativo dell'anteprima social |
+| `src/story/index.md` | Descrizione della pagina e testi dei bottoni della presentazione |
+| `src/story/slides/*.md` | Una slide per file (`order`, `year`, `illustration`, `color`, `fact` + testo) |
+| `src/training/index.md` | Testi del trainer: messaggi, complimenti, distintivo e animali |
+| `src/training/lessons/*.md` | Una lezione per file |
+| `src/challenge/index.md` | Testi della sfida: punteggi, record, bacheca |
+| `src/challenge/levels/*.md` | Un livello per file |
 
-I file dentro `slide/`, `lezioni/`, `livelli/` e `testi/` non diventano pagine. Hanno `soloContenuto: true` (impostato nei `_data.yml`), quindi i layout li leggono con `search` ma Lume non li pubblica.
+I file dentro `slides/`, `lessons/`, `levels/` e `texts/` non diventano pagine. Hanno `contentOnly: true` (impostato nei `_data.yml`), quindi i layout li leggono con `search` ma Lume non li pubblica.
 
 ### Scrivere una lezione o un livello
 
 ```yaml
 ---
 title: Il titolo
-ordine: 3            # posizione sulla mappa
+order: 3             # posizione sulla mappa
 emoji: "🏡"
-nuovi_tasti: K L Ò   # mostrati come tasti sulla mappa
-obiettivo: Frase breve per la mappa
-stelle: [400, 1000, 1800]  # solo sfida, facoltativo: punti per 1, 2 e 3 stelle
-passi:
-  - tipo: parla        # Tastino spiega; si continua con SPAZIO/INVIO
-    testo: "Testo con **grassetto**"
-    mostra: jklò       # facoltativo: tasti da illuminare
-  - tipo: scrivi       # scrivere un testo, tasto per tasto
-    istruzione: Cosa fare
-    testo: la sala
-    aiuto: tardi       # facoltativo: il suggerimento arriva dopo 3 secondi
-  - tipo: palloncini   # gioco: scoppia i palloncini con la lettera giusta
-    istruzione: Scoppia i palloncini!
-    lettere: asdf
-    quanti: 14
-  - tipo: pioggia      # (sfida) parole che cadono; durata, vite, velocita, parole
-  - tipo: cronometro   # (sfida) più parole possibile in `durata` secondi
+new_keys: K L Ò      # mostrati come tasti sulla mappa
+goal: Frase breve per la mappa
+stars: [400, 1000, 1800]  # solo sfida, facoltativo: punti per 1, 2 e 3 stelle
+steps:
+  - type: talk         # Tastino spiega; si continua con SPAZIO/INVIO
+    text: "Testo con **grassetto**"
+    show: jklò         # facoltativo: tasti da illuminare
+  - type: type         # scrivere un testo, tasto per tasto
+    instruction: Cosa fare
+    text: la sala
+    hint: late         # facoltativo: il suggerimento arriva dopo 3 secondi
+  - type: balloons     # gioco: scoppia i palloncini con la lettera giusta
+    instruction: Scoppia i palloncini!
+    letters: asdf
+    count: 14
+  - type: rain         # (sfida) parole che cadono; duration, lives, speed, words
+  - type: stopwatch    # (sfida) più parole possibile in `duration` secondi
 ---
 Il testo qui sotto è la presentazione iniziale di Tastino.
 ```
 
-Nella sfida, se un livello non ha `stelle`, le soglie si calcolano da sole in base al punteggio perfetto possibile.
+Nella sfida, se un livello non ha `stars`, le soglie si calcolano da sole in base al punteggio perfetto possibile.
 
 ## Scelte tecniche
 
@@ -171,4 +173,4 @@ Progressi, nome e record restano nel browser (`localStorage`). Non c'è nessun s
 
 Codice e contenuti sono distribuiti con la licenza [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it): puoi usare, copiare, ridistribuire e modificare Tasto dopo tasto liberamente, citando gli autori, a patto che il risultato resti gratuito e con la stessa licenza. Non è permesso usarlo per creare prodotti o materiali a pagamento.
 
-Il riassunto in italiano è in [`LICENZA.md`](LICENZA.md), il testo legale completo in [`LICENSE`](LICENSE).
+Il riassunto in italiano è in [`LICENSE.it.md`](LICENSE.it.md), il testo legale completo in [`LICENSE`](LICENSE).

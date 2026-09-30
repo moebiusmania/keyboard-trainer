@@ -1,0 +1,191 @@
+/* ---------- On-screen keyboard ---------- */
+.keyboard {
+  --u: calc((100cqi - 1.2rem) / 15.4);
+  display: grid;
+  gap: calc(var(--u) * 0.1);
+  padding: 0.6rem;
+  background: var(--ink);
+  border-radius: calc(var(--u) * 0.45);
+  box-shadow: 0 0.4rem 0 color-mix(in oklch, var(--ink), black 30%);
+  font-family: var(--font-letters);
+  user-select: none;
+}
+
+.tools-keyboard {
+  container-type: inline-size;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: calc(var(--u) * 0.1);
+}
+
+.key {
+  --w: 1;
+  --tint-finger: var(--paper);
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: var(--w) 1 0;
+  block-size: calc(var(--u) * 0.95);
+  font-size: calc(var(--u) * 0.42);
+  font-weight: 700;
+  line-height: 1;
+  background: color-mix(in oklch, var(--tint-finger) 38%, var(--paper));
+  border-radius: calc(var(--u) * 0.16);
+  box-shadow: inset 0 calc(var(--u) * -0.08) 0 color-mix(in oklch, var(--tint-finger), var(--ink) 30%);
+  transition: background 200ms, translate 120ms, box-shadow 120ms;
+
+  &[data-finger$="5"] { --tint-finger: var(--finger-5); }
+  &[data-finger$="4"] { --tint-finger: var(--finger-4); }
+  &[data-finger$="3"] { --tint-finger: var(--finger-3); }
+  &[data-finger$="2"] { --tint-finger: var(--finger-2); }
+  &[data-finger$="1"] { --tint-finger: var(--finger-1); }
+}
+
+.key--special {
+  font-family: var(--font-text);
+  font-size: calc(var(--u) * 0.32);
+  font-weight: 500;
+}
+
+.key--double {
+  grid-template-rows: 1fr 1fr;
+  font-size: calc(var(--u) * 0.32);
+
+  & .up { align-self: end; opacity: 0.6; }
+  & .down { align-self: start; }
+}
+
+/* The bump on F and J */
+.key--bump::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 16%;
+  inline-size: 32%;
+  block-size: calc(var(--u) * 0.06);
+  min-block-size: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+/* Key to press */
+.key.next {
+  z-index: 1;
+  background: var(--tint-finger);
+  outline: calc(var(--u) * 0.08) solid var(--white);
+  box-shadow: 0 0 0 calc(var(--u) * 0.14) var(--tint-finger), 0 0 calc(var(--u) * 0.6) var(--tint-finger);
+  animation: pulse-key 1s ease-in-out infinite;
+}
+
+.key.shown {
+  z-index: 1;
+  background: var(--tint-finger);
+  outline: calc(var(--u) * 0.06) solid var(--white);
+  animation: key-hop 1.4s var(--spring) infinite;
+}
+
+.key.correct {
+  animation: key-correct 250ms ease-out;
+}
+
+.key.wrong {
+  animation: key-wrong 350ms ease-out;
+}
+
+@keyframes pulse-key {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.12; }
+}
+
+@keyframes key-hop {
+  0%, 100% { translate: 0 0; }
+  30% { translate: 0 -18%; }
+}
+
+@keyframes key-correct {
+  from { translate: 0 12%; background: var(--green); box-shadow: none; }
+}
+
+@keyframes key-wrong {
+  0% { background: var(--red); }
+  25% { translate: -8% 0; }
+  75% { translate: 8% 0; }
+}
+
+/* ---------- Hands ---------- */
+.hands {
+  display: grid;
+  justify-items: center;
+  gap: 0.3rem;
+
+  & svg {
+    inline-size: min(100%, 26rem);
+    overflow: visible;
+  }
+}
+
+.hand :is(.palm, .finger-shape) {
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+
+.palm {
+  fill: var(--skin);
+}
+
+.palm-line {
+  fill: none;
+  stroke: color-mix(in oklch, var(--ink) 30%, transparent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.finger {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: translate 250ms var(--spring);
+
+  & .finger-shape {
+    fill: color-mix(in oklch, var(--color) 45%, var(--skin));
+    transition: fill 250ms;
+  }
+
+  & .finger-nail {
+    fill: color-mix(in oklch, var(--white) 70%, transparent);
+  }
+}
+
+.hands.in-use .finger:not(.active) .finger-shape {
+  fill: var(--skin);
+}
+
+.finger.active {
+  translate: 0 -8px;
+  animation: finger-tap 700ms ease-in-out infinite;
+
+  & .finger-shape {
+    fill: var(--color);
+    stroke-width: 4.5;
+  }
+}
+
+@keyframes finger-tap {
+  0%, 100% { translate: 0 -8px; }
+  50% { translate: 0 2px; }
+}
+
+.hands-caption {
+  min-block-size: 1.6em;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-align: center;
+
+  &:not(:empty) {
+    padding: 0.1rem 0.9rem;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+  }
+}

@@ -1,5 +1,5 @@
 /* ---------- Home ---------- */
-.eroe {
+.hero {
   position: relative;
   display: grid;
   justify-items: center;
@@ -9,7 +9,7 @@
   isolation: isolate;
 }
 
-.lettere-volanti {
+.flying-letters {
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -17,33 +17,33 @@
 
   & span {
     --n: 15;
-    --angolo: calc(var(--i) / var(--n) * 360deg);
+    --angle: calc(var(--i) / var(--n) * 360deg);
     position: absolute;
-    inset-block-start: calc(45% + sin(var(--angolo)) * 42%);
-    inset-inline-start: calc(50% + cos(var(--angolo)) * 46%);
+    inset-block-start: calc(45% + sin(var(--angle)) * 42%);
+    inset-inline-start: calc(50% + cos(var(--angle)) * 46%);
     display: grid;
     place-items: center;
     inline-size: 2.4rem;
     aspect-ratio: 1;
-    font-family: var(--font-lettere);
+    font-family: var(--font-letters);
     font-weight: 700;
     font-size: 1.2rem;
-    background: var(--bianco);
-    border: 2px solid color-mix(in oklch, var(--inchiostro) 40%, transparent);
+    background: var(--white);
+    border: 2px solid color-mix(in oklch, var(--ink) 40%, transparent);
     border-radius: 0.5rem;
-    color: color-mix(in oklch, var(--inchiostro) 55%, transparent);
+    color: color-mix(in oklch, var(--ink) 55%, transparent);
     opacity: 0.7;
-    animation: galleggia 6s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
     animation-delay: calc(var(--i) * -0.7s);
   }
 }
 
-@keyframes galleggia {
+@keyframes float {
   0%, 100% { translate: -50% -50%; rotate: -8deg; }
   50% { translate: -50% calc(-50% - 14px); rotate: 8deg; }
 }
 
-.titolo-tasti {
+.keys-title {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -51,33 +51,33 @@
   font-size: clamp(2.2rem, 1.2rem + 5vw, 4.6rem);
 }
 
-.titolo-parola {
+.title-word {
   display: flex;
   gap: 0.12em;
 }
 
-.tasto-titolo {
-  --colore: var(--giallo);
+.title-key {
+  --color: var(--yellow);
   text-transform: uppercase;
   display: grid;
   place-items: center;
   inline-size: 1.25em;
   aspect-ratio: 1 / 1.05;
-  background: var(--colore);
-  border: var(--bordo);
+  background: var(--color);
+  border: var(--border);
   border-radius: 0.22em;
-  box-shadow: 0 0.12em 0 var(--inchiostro), inset 0 -0.08em 0 color-mix(in oklch, var(--colore), var(--inchiostro) 25%);
+  box-shadow: 0 0.12em 0 var(--ink), inset 0 -0.08em 0 color-mix(in oklch, var(--color), var(--ink) 25%);
   animation:
-    tasto-entra 700ms var(--molla) both,
-    tasto-premuto 5s ease-in-out infinite;
+    key-enter 700ms var(--spring) both,
+    key-pressed 5s ease-in-out infinite;
   animation-delay: calc(var(--i) * 80ms), calc(1.5s + var(--i) * 250ms);
 
-  &:nth-child(4n + 2) { --colore: var(--rosa); }
-  &:nth-child(4n + 3) { --colore: var(--azzurro); }
-  &:nth-child(4n + 4) { --colore: var(--verde); }
+  &:nth-child(4n + 2) { --color: var(--pink); }
+  &:nth-child(4n + 3) { --color: var(--lightblue); }
+  &:nth-child(4n + 4) { --color: var(--green); }
 }
 
-@keyframes tasto-entra {
+@keyframes key-enter {
   from {
     opacity: 0;
     translate: 0 -2em;
@@ -85,18 +85,18 @@
   }
 }
 
-@keyframes tasto-premuto {
-  0%, 6%, 100% { translate: 0 0; box-shadow: 0 0.12em 0 var(--inchiostro); }
-  3% { translate: 0 0.1em; box-shadow: 0 0.02em 0 var(--inchiostro); }
+@keyframes key-pressed {
+  0%, 6%, 100% { translate: 0 0; box-shadow: 0 0.12em 0 var(--ink); }
+  3% { translate: 0 0.1em; box-shadow: 0 0.02em 0 var(--ink); }
 }
 
-.eroe-sottotitolo {
-  font-family: var(--font-titoli);
+.hero-subtitle {
+  font-family: var(--font-headings);
   font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
   font-weight: 500;
 }
 
-.eroe-mascotte {
+.hero-mascot {
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -104,25 +104,25 @@
   margin-block-start: 1rem;
   text-align: start;
 
-  & .mascotte {
+  & .mascot {
     inline-size: clamp(6rem, 18vw, 9rem);
     flex: none;
   }
 
-  & .fumetto {
-    animation: comparsa 600ms var(--molla) 900ms both;
+  & .bubble {
+    animation: appear 600ms var(--spring) 900ms both;
   }
 }
 
-@keyframes comparsa {
+@keyframes appear {
   from { opacity: 0; scale: 0.6; translate: -1rem 0; }
 }
 
-/* Carte delle tre aree */
-.aree {
+/* Cards of the three areas */
+.areas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-  gap: calc(var(--spazio) * 1.2);
+  gap: calc(var(--space) * 1.2);
   padding: 0;
   margin-block: 2rem 3rem;
   list-style: none;
@@ -130,11 +130,11 @@
 
 .area {
   container-type: inline-size;
-  animation: carta-entra 700ms var(--molla) both;
+  animation: card-enter 700ms var(--spring) both;
   animation-delay: calc(400ms + var(--i) * 150ms);
 }
 
-@keyframes carta-entra {
+@keyframes card-enter {
   from {
     opacity: 0;
     translate: 0 3rem;
@@ -151,17 +151,17 @@
   padding: 1.5rem;
   text-decoration: none;
   background:
-    radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--bianco) 45%, transparent) 0 30%, transparent 31%),
-    var(--tinta);
-  border: var(--bordo);
-  border-radius: calc(var(--raggio) * 1.3);
-  box-shadow: var(--ombra);
-  transition: transform 300ms var(--molla), box-shadow 300ms;
+    radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--white) 45%, transparent) 0 30%, transparent 31%),
+    var(--tint);
+  border: var(--border);
+  border-radius: calc(var(--radius) * 1.3);
+  box-shadow: var(--shadow);
+  transition: transform 300ms var(--spring), box-shadow 300ms;
 
   &:hover,
   &:focus-visible {
     transform: translate(-4px, -6px) rotate(-1.2deg);
-    box-shadow: 0.7rem 0.8rem 0 var(--inchiostro);
+    box-shadow: 0.7rem 0.8rem 0 var(--ink);
   }
 
   .area:nth-child(even) &:hover {
@@ -169,7 +169,7 @@
   }
 }
 
-.area-numero {
+.area-number {
   position: absolute;
   inset-block-start: -1rem;
   inset-inline-end: 1.2rem;
@@ -177,24 +177,24 @@
   place-items: center;
   inline-size: 2.6rem;
   aspect-ratio: 1;
-  font-family: var(--font-titoli);
+  font-family: var(--font-headings);
   font-weight: 700;
   font-size: 1.4rem;
-  background: var(--bianco);
-  border: var(--bordo);
+  background: var(--white);
+  border: var(--border);
   border-radius: 50%;
-  box-shadow: var(--ombra-piccola);
+  box-shadow: var(--shadow-small);
 }
 
-.area-icona {
+.area-icon {
   inline-size: 6rem;
 }
 
-.area-titolo {
+.area-title {
   font-size: clamp(1.4rem, 7cqi, 1.9rem);
 }
 
-.area-piede {
+.area-footer {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -202,13 +202,13 @@
   gap: 0.5rem;
 }
 
-.area-azione {
-  font-family: var(--font-titoli);
+.area-action {
+  font-family: var(--font-headings);
   font-weight: 700;
 
   & span {
     display: inline-block;
-    transition: translate 300ms var(--molla);
+    transition: translate 300ms var(--spring);
   }
 
   .area-link:hover & span {
@@ -216,15 +216,15 @@
   }
 }
 
-/* Consigli, con animazione guidata dallo scroll */
-.consigli {
+/* Tips, with a scroll-driven animation */
+.tips {
   max-inline-size: 48rem;
   margin-inline: auto;
   padding: 1.5rem;
-  background: var(--bianco);
-  border: var(--bordo);
-  border-radius: var(--raggio);
-  box-shadow: var(--ombra);
+  background: var(--white);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 
   & h2 {
     margin-block-end: 1rem;
@@ -245,27 +245,27 @@
   }
 }
 
-.consiglio-icona {
+.tip-icon {
   display: grid;
   place-items: center;
   flex: none;
   inline-size: 3rem;
   aspect-ratio: 1;
   font-size: 1.6rem;
-  background: var(--crema);
-  border: var(--bordo);
+  background: var(--cream);
+  border: var(--border);
   border-radius: 50%;
 }
 
 @supports (animation-timeline: view()) {
-  .consigli li {
-    animation: scivola-dentro linear both;
+  .tips li {
+    animation: slide-in linear both;
     animation-timeline: view();
     animation-range: entry 0% entry 100%;
   }
 }
 
-@keyframes scivola-dentro {
+@keyframes slide-in {
   from {
     opacity: 0;
     translate: -3rem 0;

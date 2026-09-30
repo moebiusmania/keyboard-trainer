@@ -1,0 +1,368 @@
+/* Cartoon-style SVG illustrations: thick outline and flat colors */
+.illu {
+  inline-size: 100%;
+  block-size: auto;
+  overflow: visible;
+
+  & :is(rect, path, circle, ellipse, polygon) {
+    stroke: var(--ink);
+    stroke-width: 4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  & .sn { stroke: none; }
+  & .sn-f { fill: none; }
+  & .sn-l { stroke-width: 2; }
+  & .i-background { fill: color-mix(in oklch, var(--white) 55%, transparent); }
+  & .i-paper { fill: var(--paper); }
+  & .i-cream { fill: var(--cream); }
+  & .i-white { fill: var(--white); }
+  & .i-gray { fill: var(--gray); }
+  & .i-yellow { fill: var(--yellow); }
+  & .i-orange { fill: var(--orange); }
+  & .i-pink { fill: var(--pink); }
+  & .i-purple { fill: var(--purple); }
+  & .i-blue { fill: var(--blue); }
+  & .i-lightblue { fill: var(--lightblue); }
+  & .i-green { fill: var(--green); }
+  & .i-dark-green { fill: var(--dark-green); }
+  & .i-ink { fill: var(--ink); }
+  & .i-screen { fill: oklch(30% 0.06 160); }
+
+  & .illu-text {
+    font-family: var(--font-headings);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--ink);
+  }
+
+  & .illu-text--large { font-size: 30px; }
+
+  & .illu-text--screen {
+    font-family: ui-monospace, "Courier New", monospace;
+    font-size: 26px;
+    fill: oklch(88% 0.2 150);
+  }
+
+  & :is(g, rect, circle, path, text):not([transform]) {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+}
+
+/* Pen */
+.illu-pen {
+  & .writing {
+    fill: none;
+    stroke-width: 3;
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: write-line 6s linear infinite;
+  }
+
+  & .s2 { animation-delay: 1.2s; }
+  & .s3 { animation-delay: 2.4s; }
+  & .s4 { animation-delay: 3.6s; }
+
+  & .feather {
+    animation: feather 1.2s ease-in-out infinite;
+    transform-origin: 0% 100%;
+  }
+
+  & .blot {
+    scale: 0;
+    animation: blot 6s var(--spring) infinite;
+  }
+
+  & .marks path {
+    fill: none;
+    stroke-width: 3;
+  }
+}
+
+@keyframes write-line {
+  0% { stroke-dashoffset: 220; }
+  20%, 90% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes feather {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  25% { translate: -8px 4px; rotate: -4deg; }
+  75% { translate: 6px -2px; rotate: 3deg; }
+}
+
+@keyframes blot {
+  0%, 70% { scale: 0; }
+  76%, 95% { scale: 1.3 1; }
+  100% { scale: 0; }
+}
+
+/* Typewriter */
+.illu-typewriter {
+  & .tt {
+    fill: var(--paper);
+    animation: key-down 2.4s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  & :is(.t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8) {
+    animation-play-state: running;
+  }
+
+  & .t2 { animation-delay: 0.3s; }
+  & .t3 { animation-delay: 0.6s; }
+  & .t4 { animation-delay: 0.9s; }
+  & .t5 { animation-delay: 1.2s; }
+  & .t6 { animation-delay: 1.5s; }
+  & .t7 { animation-delay: 1.8s; }
+  & .t8 { animation-delay: 2.1s; }
+
+  & .hammers path {
+    stroke-width: 3;
+  }
+
+  & .written-line {
+    transform-origin: 0% 50%;
+    scale: 0 1;
+    animation: typed-line 8s steps(12) infinite;
+  }
+
+  & .r2 { animation-delay: 1.5s; }
+  & .r3 { animation-delay: 3s; }
+  & .r4 { animation-delay: 4.5s; }
+
+  & .sheet {
+    animation: sheet-rise 8s ease-in-out infinite;
+  }
+
+  & .ding {
+    scale: 0;
+    animation: ding 4s var(--spring) infinite;
+  }
+
+  & .lever {
+    fill: none;
+    stroke-width: 7;
+  }
+}
+
+@keyframes key-down {
+  0%, 8%, 100% { translate: 0 0; }
+  4% { translate: 0 4px; }
+}
+
+@keyframes typed-line {
+  0% { scale: 0 1; }
+  15%, 92% { scale: 1 1; }
+  100% { scale: 1 1; opacity: 0; }
+}
+
+@keyframes sheet-rise {
+  0%, 10% { translate: 0 20px; }
+  90%, 100% { translate: 0 -6px; }
+}
+
+@keyframes ding {
+  0%, 60% { scale: 0; rotate: -30deg; }
+  70%, 90% { scale: 1; rotate: 0deg; }
+  100% { scale: 0; }
+}
+
+/* QWERTY */
+.illu-qwerty {
+  & .bigkey {
+    animation: bigkey 3s var(--spring) infinite;
+    animation-delay: calc(var(--i) * 150ms);
+  }
+
+  & .bars path {
+    stroke-width: 5;
+  }
+
+  & .bar-a,
+  & .bar-b {
+    stroke-width: 6;
+  }
+
+  & .jam {
+    animation: jam 0.4s ease-in-out infinite;
+  }
+
+  & .sparkles {
+    animation: pulse 1s ease-in-out infinite;
+  }
+}
+
+@keyframes bigkey {
+  0%, 30%, 100% { translate: 0 0; }
+  10% { translate: 0 -14px; rotate: -6deg; }
+  20% { translate: 0 2px; }
+}
+
+@keyframes jam {
+  0%, 100% { rotate: -2deg; }
+  50% { rotate: 2deg; }
+}
+
+@keyframes pulse {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.25; }
+}
+
+/* Computer */
+.illu-computer {
+  & .wire {
+    stroke-width: 6;
+  }
+
+  & .wire-signal {
+    stroke: var(--yellow);
+    stroke-width: 3;
+    stroke-dasharray: 6 18;
+    animation: signal 1s linear infinite;
+  }
+
+  & .screen-text text {
+    clip-path: inset(0 100% 0 0);
+    animation: typing 5s steps(7) infinite;
+  }
+
+  & .cursor {
+    fill: oklch(88% 0.2 150);
+    animation: flash 0.8s steps(1) infinite;
+  }
+
+  & .tk {
+    fill: var(--paper);
+    stroke-width: 2;
+    animation: key-light 3s ease-in-out infinite;
+    animation-delay: calc(var(--c) * -0.37s);
+  }
+}
+
+@keyframes signal {
+  to { stroke-dashoffset: -24; }
+}
+
+@keyframes typing {
+  0% { clip-path: inset(0 100% 0 0); }
+  60%, 100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes flash {
+  50% { opacity: 0; }
+}
+
+@keyframes key-light {
+  0%, 85%, 100% { fill: var(--paper); translate: 0 0; }
+  90% { fill: var(--yellow); translate: 0 2px; }
+}
+
+/* Today's keyboard */
+.illu-keyboard {
+  & .rgb {
+    stroke-width: 2;
+    animation: rainbow 3s linear infinite;
+    animation-delay: calc(var(--c) * -0.2s);
+  }
+
+  & .wave {
+    stroke-width: 5;
+    animation: wave 1.5s ease-in-out infinite;
+  }
+
+  & .o2 { animation-delay: 0.2s; }
+  & .o3 { animation-delay: 0.4s; }
+
+  & .click {
+    font-size: 26px;
+    animation: click 2s var(--spring) infinite;
+  }
+
+  & .c2 { animation-delay: 1s; }
+
+  & .mouse {
+    animation: sway 3s ease-in-out infinite;
+  }
+}
+
+@keyframes rainbow {
+  0%, 100% { fill: var(--pink); }
+  20% { fill: var(--orange); }
+  40% { fill: var(--yellow); }
+  60% { fill: var(--green); }
+  80% { fill: var(--blue); }
+}
+
+@keyframes wave {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+@keyframes click {
+  0%, 50%, 100% { scale: 0; }
+  15%, 35% { scale: 1; rotate: -8deg; }
+}
+
+/* Smartphone */
+.illu-smartphone {
+  & .touch {
+    fill: color-mix(in oklch, var(--blue) 60%, transparent);
+    stroke: none;
+    scale: 0;
+    animation: touch 2.4s ease-out infinite;
+  }
+
+  & .tc2 { animation-delay: 0.8s; }
+  & .tc3 { animation-delay: 1.6s; }
+
+  & .suggestions rect {
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  & .suggestions rect:nth-child(2) { animation-delay: 0.3s; }
+  & .suggestions rect:nth-child(3) { animation-delay: 0.6s; }
+
+  & .flying-emoji {
+    font-size: 30px;
+    animation: emoji-rise 3s ease-in infinite;
+  }
+
+  & .e2 { animation-delay: 1s; }
+  & .e3 { animation-delay: 2s; }
+
+  & .microphone {
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+
+  & .phone {
+    rotate: 6deg;
+  }
+}
+
+@keyframes touch {
+  0% { scale: 0; opacity: 1; }
+  40% { scale: 1.8; opacity: 0; }
+  100% { scale: 1.8; opacity: 0; }
+}
+
+@keyframes emoji-rise {
+  0% { translate: 0 60px; opacity: 0; scale: 0.5; }
+  20% { opacity: 1; scale: 1; }
+  100% { translate: 0 -30px; opacity: 0; }
+}
+
+/* Area icons on the home page */
+.icon .icon-feather,
+.icon .icon-key-2,
+.icon .icon-star {
+  transition: translate 300ms var(--spring), rotate 300ms var(--spring);
+}
+
+.area-link:hover {
+  & .icon-feather { translate: -6px 4px; rotate: -10deg; }
+  & .icon-key-2 { translate: 0 5px; }
+  & .icon-star { rotate: 72deg; scale: 1.2; }
+}

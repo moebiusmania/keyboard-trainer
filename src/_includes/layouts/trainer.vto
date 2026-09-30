@@ -2,44 +2,44 @@
 layout: layouts/base.vto
 script: /js/trainer/app.js
 ---
-{{ set ui = search.page("id=interfaccia") }}
-{{ set lezioni = search.pages("tipo=" + collezione, "ordine") }}
-{{# Il link alla sfida viene scritto dal JS, quindi il percorso base va aggiunto qui #}}
-{{ set datiTesti = testi }}
-{{ if testi.badge?.sfida_url }}
-{{ set sfidaUrl = testi.badge.sfida_url |> url }}
-{{ set datiTesti = { ...testi, badge: { ...testi.badge, sfida_url: sfidaUrl } } }}
+{{ set ui = search.page("id=interface") }}
+{{ set lessons = search.pages("type=" + collection, "order") }}
+{{# The link to the challenge is written by the JS, so the base path has to be added here #}}
+{{ set textsData = texts }}
+{{ if texts.badge?.challenge_url }}
+{{ set challengeUrl = texts.badge.challenge_url |> url }}
+{{ set textsData = { ...texts, badge: { ...texts.badge, challenge_url: challengeUrl } } }}
 {{ /if }}
-<section class="trainer" data-modalita="{{ modalita }}" data-colore="{{ colore }}">
-  <header class="pagina-testa">
-    <h1 style="view-transition-name: titolo-{{ nome_area }}">{{ title }}</h1>
-    <div class="pagina-intro">{{ content }}</div>
+<section class="trainer" data-mode="{{ mode }}" data-color="{{ color }}">
+  <header class="page-header">
+    <h1 style="view-transition-name: title-{{ area }}">{{ title }}</h1>
+    <div class="page-intro">{{ content }}</div>
   </header>
 
-  <p class="avviso-tastiera">{{ ui.serve_tastiera }}</p>
+  <p class="keyboard-notice">{{ ui.keyboard_needed }}</p>
 
   <div id="app" class="app">
-    <noscript><p class="fumetto">JavaScript è necessario per giocare.</p></noscript>
+    <noscript><p class="bubble">JavaScript è necessario per giocare.</p></noscript>
   </div>
 
-  <template id="tpl-mascotte">{{ include "partials/mascotte.vto" { classe: "mascotte--palco" } }}</template>
-  {{ for l of lezioni }}
-  <template data-intro="{{ l.ordine }}">{{ l.content |> md }}</template>
+  <template id="tpl-mascot">{{ include "partials/mascot.vto" { className: "mascot--stage" } }}</template>
+  {{ for l of lessons }}
+  <template data-intro="{{ l.order }}">{{ l.content |> md }}</template>
   {{ /for }}
-  <script type="application/json" id="dati-trainer">{{ {
-    modalita,
-    area: nome_area,
-    testi: datiTesti,
-    dita: ui.dita,
-    lezioni: lezioni.map((l) => ({
-      ordine: l.ordine,
-      titolo: l.title,
+  <script type="application/json" id="trainer-data">{{ {
+    mode,
+    area,
+    texts: textsData,
+    fingers: ui.fingers,
+    lessons: lessons.map((l) => ({
+      order: l.order,
+      title: l.title,
       emoji: l.emoji,
-      nuovi_tasti: l.nuovi_tasti,
-      obiettivo: l.obiettivo,
-      stelle: l.stelle,
-      finale: l.finale,
-      passi: l.passi,
+      new_keys: l.new_keys,
+      goal: l.goal,
+      stars: l.stars,
+      final: l.final,
+      steps: l.steps,
     })),
   } |> json }}</script>
 </section>

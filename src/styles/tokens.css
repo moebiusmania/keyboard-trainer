@@ -1,0 +1,65 @@
+@property --rotation {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  /* Infographic palette: flat colors, dark outline */
+  --ink: oklch(27% 0.05 265);
+  --paper: oklch(97.5% 0.02 85);
+  --cream: oklch(93% 0.05 85);
+  --white: oklch(100% 0 0);
+  --gray: oklch(78% 0.02 265);
+  --yellow: oklch(88% 0.16 92);
+  --orange: oklch(78% 0.15 55);
+  --pink: oklch(76% 0.14 355);
+  --purple: oklch(70% 0.14 300);
+  --blue: oklch(72% 0.12 245);
+  --lightblue: oklch(86% 0.08 220);
+  --green: oklch(80% 0.16 145);
+  --dark-green: oklch(62% 0.13 150);
+  --red: oklch(64% 0.21 25);
+  --skin: oklch(88% 0.05 60);
+
+  /* Finger colors (the same for both hands) */
+  --finger-5: var(--pink);
+  --finger-4: var(--purple);
+  --finger-3: var(--blue);
+  --finger-2: var(--green);
+  --finger-1: var(--yellow);
+
+  --tint: var(--yellow);
+
+  --font-headings: "Fredoka", "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --font-text: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-letters: "Andika", "Fredoka", system-ui, sans-serif;
+
+  --border-width: 3px;
+  --border: var(--border-width) solid var(--ink);
+  --radius: 1.25rem;
+  --radius-small: 0.7rem;
+  --shadow: 0.3rem 0.35rem 0 var(--ink);
+  --shadow-small: 0.15rem 0.2rem 0 var(--ink);
+
+  --spring: cubic-bezier(0.3, 1.6, 0.5, 1);
+  --smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --space: clamp(1rem, 2.5vw, 2rem);
+  --max-width: 72rem;
+}
+
+/* Every element with data-color sets its own tint */
+[data-color="yellow"] { --tint: var(--yellow); }
+[data-color="orange"] { --tint: var(--orange); }
+[data-color="pink"] { --tint: var(--pink); }
+[data-color="purple"] { --tint: var(--purple); }
+[data-color="blue"] { --tint: var(--blue); }
+[data-color="lightblue"] { --tint: var(--lightblue); }
+[data-color="green"] { --tint: var(--green); }

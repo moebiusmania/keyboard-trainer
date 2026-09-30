@@ -1,0 +1,28 @@
+<svg class="illu illu-qwerty" viewBox="0 0 400 300" role="img" aria-label="I tasti Q W E R T Y e i martelletti di una macchina da scrivere che si incastrano">
+  <circle class="i-background sn" cx="200" cy="150" r="130" />
+  <g class="qwerty-row">
+    {{ for i, l of ["Q", "W", "E", "R", "T", "Y"] }}
+    <g class="bigkey" style="--i: {{ i }}">
+      <rect class="i-orange" x="{{ 24 + i * 60 }}" y="34" width="52" height="56" rx="10" />
+      <rect class="i-paper" x="{{ 30 + i * 60 }}" y="30" width="40" height="44" rx="8" />
+      <text class="illu-text illu-text--large" x="{{ 50 + i * 60 }}" y="63" text-anchor="middle">{{ l }}</text>
+    </g>
+    {{ /for }}
+  </g>
+  <g class="basket">
+    <path class="i-gray" d="M70 270a130 70 0 0 1 260 0z" />
+    <g class="sn-f bars">
+      <path d="M92 262l108-62M120 244l80-44M156 232l44-32M244 232l-44-32M280 244l-80-44M308 262l-108-62" />
+    </g>
+    <g class="jam">
+      <path class="sn-f bar-a" d="M150 250 214 150" />
+      <path class="sn-f bar-b" d="M250 250 186 150" />
+      <rect class="i-ink" x="202" y="138" width="20" height="14" rx="3" transform="rotate(32 212 145)" />
+      <rect class="i-ink" x="178" y="138" width="20" height="14" rx="3" transform="rotate(-32 188 145)" />
+    </g>
+    <g class="sparkles">
+      <path class="i-yellow" d="M200 112l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2z" />
+      <text class="illu-text" x="244" y="124">?!</text>
+    </g>
+  </g>
+</svg>
