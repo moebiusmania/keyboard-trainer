@@ -1,5 +1,7 @@
 // Service worker: makes the site installable and playable offline.
-// Generated at build time so the precache lists every published page and file.
+// Generated at build time so the precache lists every published page and file;
+// VERSION is filled in by _config.ts with a hash of the whole site, so it changes
+// (and installed apps update their offline copy) only when something is deployed.
 export const url = "/sw.js";
 
 export default function ({ search }: Lume.Data) {
@@ -14,7 +16,7 @@ export default function ({ search }: Lume.Data) {
   // Paths relative to the service worker, so they also work in a subfolder
   const precache = [...pages, ...files].map((path) => "." + path);
 
-  return `const VERSION = ${JSON.stringify(String(Date.now()))};
+  return `const VERSION = "__VERSION__";
 const CACHE = "tasto-dopo-tasto-" + VERSION;
 const FONTS = "tasto-dopo-tasto-fonts";
 const PRECACHE = ${JSON.stringify(precache, null, 2)};
@@ -22,7 +24,8 @@ const PRECACHE = ${JSON.stringify(precache, null, 2)};
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE)
-      .then((cache) => cache.addAll(PRECACHE))
+      // "reload" skips the HTTP cache, so the new version never saves old files
+      .then((cache) => cache.addAll(PRECACHE.map((path) => new Request(path, { cache: "reload" }))))
       .then(() => self.skipWaiting()),
   );
 });

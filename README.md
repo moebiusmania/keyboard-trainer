@@ -168,7 +168,7 @@ Nella sfida, se un livello non ha `stars`, le soglie si calcolano da sole in bas
 - **JavaScript**: moduli ES nativi, senza bundler e senza dipendenze.
 - **SVG** per illustrazioni, mascotte e manine. **Canvas** per coriandoli e distintivo. **Web Audio** per i suoni, sintetizzati, senza file audio.
 - **Font** da [Bunny Fonts](https://fonts.bunny.net): Fredoka per i titoli e l'interfaccia, Andika (pensato per chi impara a leggere) per le lettere da scrivere.
-- **App installabile (PWA)**: con il manifest e il service worker il sito si può aggiungere alla schermata Home o installare dal browser, e funziona anche senza connessione. Pagine, stili e script arrivano prima dalla rete (così gli aggiornamenti si vedono subito) e, senza connessione, dalla copia salvata alla prima visita; i font dalla cache, rinnovata in background.
+- **App installabile (PWA)**: con il manifest e il service worker il sito si può aggiungere alla schermata Home o installare dal browser, e funziona anche senza connessione. Pagine, stili e script arrivano prima dalla rete (così gli aggiornamenti si vedono subito) e, senza connessione, dalla copia salvata; i font dalla cache, rinnovata in background. La versione del service worker è un hash di tutto il sito: quando si pubblica una modifica, l'app installata se ne accorge (all'avvio, quando torna in primo piano o online, e ogni ora), scarica in background la nuova copia per l'uso offline e la usa dalla pagina successiva.
 - **Contenuti separati dal codice**: lezioni, livelli e slide sono file Markdown, quindi si aggiungono o si correggono senza programmare.
 
 ## Privacy
