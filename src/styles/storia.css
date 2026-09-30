@@ -169,7 +169,8 @@
   &::after {
     content: "";
     position: absolute;
-    inset-inline: 1rem;
+    /* La linea parte e finisce al centro del primo e dell'ultimo punto */
+    inset-inline: calc(50% / var(--passi));
     inset-block-start: 0.85rem;
     block-size: 6px;
     border-radius: 3px;
@@ -179,13 +180,18 @@
   &::after {
     background: var(--inchiostro);
     inset-inline-end: auto;
-    inline-size: calc((100% - 2rem) * var(--progresso));
+    inline-size: calc((100% - 100% / var(--passi)) * var(--progresso));
     transition: --progresso 500ms var(--morbido);
   }
 
+  /* Colonne tutte uguali: la distanza tra i punti non dipende dalla lunghezza delle etichette */
   & li {
     position: relative;
     z-index: 1;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    min-inline-size: 0;
   }
 
   & button {
