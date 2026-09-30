@@ -130,10 +130,17 @@ function disegnaSentiero() {
   const mappa = app.querySelector(".mappa");
   if (!mappa) return;
   const svg = mappa.querySelector(".sentiero");
-  const box = mappa.getBoundingClientRect();
+  // Misure di layout (offset*) e non getBoundingClientRect: le tappe sono ancora
+  // spostate e rimpicciolite dall'animazione d'ingresso quando il sentiero viene disegnato
+  const box = { width: mappa.offsetWidth, height: mappa.offsetHeight };
   const punti = [...mappa.querySelectorAll(".tappa-bottone")].map((b) => {
-    const r = b.getBoundingClientRect();
-    return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2 };
+    let x = b.offsetWidth / 2;
+    let y = b.offsetHeight / 2;
+    for (let el = b; el && el !== mappa; el = el.offsetParent) {
+      x += el.offsetLeft;
+      y += el.offsetTop;
+    }
+    return { x, y };
   });
   if (!punti.length) return;
   const percorso = (lista) =>
