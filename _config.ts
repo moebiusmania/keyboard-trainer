@@ -12,6 +12,14 @@ site.add("js");
 site.add("favicon.svg");
 site.add("social-preview.png");
 
+// Installable app (PWA): manifest and icons; the service worker is sw.page.ts
+site.add("manifest.webmanifest");
+site.add("icons/icon-192.png");
+site.add("icons/icon-512.png");
+site.add("icons/icon-maskable-192.png");
+site.add("icons/icon-maskable-512.png");
+site.add("icons/apple-touch-icon.png");
+
 // If the site is published in a subfolder (e.g. GitHub Pages),
 // prepends the `location` path to the absolute links in the HTML
 site.use(basePath());

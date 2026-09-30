@@ -73,6 +73,7 @@ Si impara a scrivere con dieci dita giocando, guidati da **Tastino**, il tasto p
 deno task serve     # sito in locale su http://localhost:3000 con ricarica automatica
 deno task dev:host  # come serve, ma raggiungibile da altri dispositivi in rete (http://<ip-della-macchina>:3000)
 deno task build     # genera il sito statico in _site/
+deno task icons     # rigenera le icone PNG dell'app da src/icons/*.svg
 ```
 
 La cartella `_site/` si può pubblicare così com'è su qualsiasi hosting statico (GitHub Pages, Netlify, un server della scuola...). Prima di pubblicare, indica l'indirizzo vero del sito, anche se è in una sottocartella: serve per i link interni e per le anteprime quando il sito viene condiviso sui social o nelle chat.
@@ -90,12 +91,16 @@ Su GitHub Pages ci pensa il workflow `.github/workflows/pages.yml`: a ogni push 
 ├── _config.ts            # configurazione di Lume
 ├── deno.json             # import e task
 ├── docs/                 # immagini per questo README
+├── scripts/icons.ts      # disegna le icone PNG dagli SVG
 └── src/
     ├── index.md          # home
     ├── story/            # presentazione e slide (pagina /storia/)
     ├── training/         # trainer e lezioni (pagina /allenamento/)
     ├── challenge/        # trainer e livelli (pagina /sfida/)
     ├── texts/            # testi comuni dell'interfaccia
+    ├── icons/            # icone dell'app (SVG di partenza e PNG generati)
+    ├── manifest.webmanifest # manifest dell'app installabile
+    ├── sw.page.ts        # service worker, generato con l'elenco dei file da salvare
     ├── _includes/
     │   ├── layouts/      # home, story, trainer, base
     │   ├── partials/     # mascotte
@@ -163,6 +168,7 @@ Nella sfida, se un livello non ha `stars`, le soglie si calcolano da sole in bas
 - **JavaScript**: moduli ES nativi, senza bundler e senza dipendenze.
 - **SVG** per illustrazioni, mascotte e manine. **Canvas** per coriandoli e distintivo. **Web Audio** per i suoni, sintetizzati, senza file audio.
 - **Font** da [Bunny Fonts](https://fonts.bunny.net): Fredoka per i titoli e l'interfaccia, Andika (pensato per chi impara a leggere) per le lettere da scrivere.
+- **App installabile (PWA)**: con il manifest e il service worker il sito si può aggiungere alla schermata Home o installare dal browser, e funziona anche senza connessione. Pagine, stili e script arrivano prima dalla rete (così gli aggiornamenti si vedono subito) e, senza connessione, dalla copia salvata alla prima visita; i font dalla cache, rinnovata in background.
 - **Contenuti separati dal codice**: lezioni, livelli e slide sono file Markdown, quindi si aggiungono o si correggono senza programmare.
 
 ## Privacy

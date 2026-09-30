@@ -19,3 +19,8 @@ button?.addEventListener("click", () => {
 });
 
 updateButton();
+
+// Installable app and offline play: the service worker is at the site root
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register(new URL("../sw.js", import.meta.url)).catch(() => {});
+}

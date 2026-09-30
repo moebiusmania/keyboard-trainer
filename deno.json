@@ -6,7 +6,8 @@
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "build": "deno task lume",
     "serve": "deno task lume -s",
-    "dev:host": "deno task lume -s --hostname 0.0.0.0"
+    "dev:host": "deno task lume -s --hostname 0.0.0.0",
+    "icons": "deno run --allow-read --allow-write --allow-net scripts/icons.ts"
   },
   "compilerOptions": {
     "types": ["lume/types.ts"]
