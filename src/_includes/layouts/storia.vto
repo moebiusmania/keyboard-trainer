@@ -43,7 +43,7 @@ script: /js/storia.js
       <button class="freccia freccia--indietro" type="button" data-vai="-1" aria-label="{{ testi.precedente }}">
         <span aria-hidden="true">←</span>
       </button>
-      <ol class="linea-tempo" role="list">
+      <ol class="linea-tempo" role="list" style="--passi: {{ slides.length }}">
         {{ for i, s of slides }}
         <li>
           <button type="button" data-slide="{{ i + 1 }}" data-colore="{{ s.colore }}" aria-label="{{ testi.slide }} {{ i + 1 }}: {{ s.title }}"{{ if i == 0 }} aria-current="step"{{ /if }}>
