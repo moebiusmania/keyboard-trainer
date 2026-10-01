@@ -5,7 +5,7 @@ description: Impara a usare la tastiera giocando, con Tastino!
 mascot: Tastino
 preview:
   image: /social-preview.png
-  alt: "Tastino, un tasto giallo e arancione che sorride, accanto alla scritta «Tasto dopo tasto, impara la tastiera giocando!» e ai tasti colorati della riga di casa."
+  alt: "Tastino, un tasto giallo e arancione che sorride, accanto alla scritta «Tasto dopo tasto, impara ad usare la tastiera giocando!» e ai tasti colorati della riga di casa."
 footer: Fatto con 💛 per piccole dita curiose.
 license:
   authors: © 2026 gli autori di Tasto dopo tasto

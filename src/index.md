@@ -2,7 +2,7 @@
 layout: layouts/home.vto
 title: Tasto dopo tasto
 big_title: Tasto dopo tasto
-subtitle: Impara la tastiera giocando!
+subtitle: Impara ad usare la tastiera giocando!
 bubble: "Ciao! Io sono **Tastino**, il tasto più simpatico del mondo. Vuoi diventare un mago della tastiera? Scegli da dove partire!"
 areas:
   - url: /storia/
