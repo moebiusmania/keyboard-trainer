@@ -5,7 +5,9 @@ import { transition } from "../lib/transition.js";
 import { createKeyboard } from "../lib/keyboard.js";
 import { createHands } from "../lib/hands.js";
 import { confetti } from "../lib/confetti.js";
-import { drawBadge, downloadBadge } from "../lib/badge.js";
+import { drawBadge } from "../lib/badge.js";
+import { drawBoard } from "../lib/board.js";
+import { downloadPng } from "../lib/canvas.js";
 import { waitContinue } from "./input.js";
 import { maxFor, Score } from "./score.js";
 import { talk } from "./exercises/talk.js";
@@ -77,14 +79,27 @@ function greetingHtml() {
     </form>`;
 }
 
-function boardHtml(p) {
+const boardPlayerHtml = () => {
+  const n = playerName();
+  return n ? esc(fill(texts.board_player, { name: n })) : "";
+};
+
+function boardData(p) {
   const rows = lessons.filter((l) => p[l.order]);
+  return {
+    rows,
+    total: rows.reduce((s, l) => s + p[l.order].points, 0),
+    stars: rows.reduce((s, l) => s + p[l.order].stars, 0),
+  };
+}
+
+function boardHtml(p) {
+  const { rows, total, stars } = boardData(p);
   if (!rows.length) return `<section class="board"><h2>🏆 ${esc(texts.board_title)}</h2><p>${esc(texts.board_empty)}</p></section>`;
-  const total = rows.reduce((s, l) => s + p[l.order].points, 0);
-  const stars = rows.reduce((s, l) => s + p[l.order].stars, 0);
   return `
     <section class="board">
       <h2>🏆 ${esc(texts.board_title)}</h2>
+      <p class="board-player">${boardPlayerHtml()}</p>
       <div class="board-totals">
         <p><span>${esc(texts.board_total)}</span><strong>${total.toLocaleString("it-IT")}</strong></p>
         <p><span>${esc(texts.board_stars)}</span><strong>${stars} / ${lessons.length * 3}</strong></p>
@@ -94,8 +109,39 @@ function boardHtml(p) {
           <li><span aria-hidden="true">${l.emoji}</span> <span class="board-name">${esc(l.title)}</span>
           ${starsHtml(p[l.order].stars)} <strong>${p[l.order].points.toLocaleString("it-IT")}</strong></li>`).join("")}
       </ol>
+      <button type="button" class="button button--pink" data-action="export">📷 ${esc(texts.board_export)}</button>
       <button type="button" class="link-button" data-action="reset">${esc(texts.board_reset)}</button>
     </section>`;
+}
+
+async function exportBoard() {
+  const p = progress();
+  const { rows, total, stars } = boardData(p);
+  const n = playerName();
+  const date = new Date().toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+  const canvas = document.createElement("canvas");
+  await drawBoard(canvas, {
+    title: texts.board_title,
+    player: n ? fill(texts.board_player, { name: n }) : "",
+    totals: [
+      { label: texts.board_total, value: total.toLocaleString("it-IT") },
+      { label: texts.board_stars, value: `${stars} / ${lessons.length * 3}` },
+    ],
+    rows: rows.map((l) => ({
+      emoji: l.emoji,
+      title: l.title,
+      stars: p[l.order].stars,
+      points: p[l.order].points.toLocaleString("it-IT"),
+    })),
+    footer: fill(texts.board_footer, { date }),
+  });
+  downloadPng(canvas, texts.board_file_name);
+}
+
+/** The name lives in the greeting and on the board: both follow its changes */
+function refreshPlayer() {
+  const el = app.querySelector(".board-player");
+  if (el) el.innerHTML = boardPlayerHtml();
 }
 
 function showMap(direction = "back") {
@@ -169,6 +215,7 @@ app.addEventListener("submit", (e) => {
   play("ding");
   const bubble = app.querySelector(".welcome-bubble");
   bubble.innerHTML = value ? greetingHtml() : `<p>${esc(texts.greeting_anonymous)}</p>`;
+  refreshPlayer();
   app.querySelector(".welcome .mascot")?.setAttribute("data-mood", "party");
   app.querySelector(".stop--next .stop-button, .stop--open .stop-button")?.focus();
 });
@@ -199,10 +246,15 @@ app.addEventListener("click", (e) => {
     case "change-name":
       remove("name");
       app.querySelector(".welcome-bubble").innerHTML = greetingHtml();
+      refreshPlayer();
       app.querySelector("#player-name")?.focus();
       break;
     case "badge":
       openBadge(false);
+      break;
+    case "export":
+      play("pop");
+      exportBoard();
       break;
     case "reset":
       if (confirm(texts.board_confirm)) {
@@ -494,7 +546,7 @@ async function openBadge(isNew) {
   modal.addEventListener("click", async (e) => {
     const action = e.target.closest("[data-d]")?.dataset.d;
     if (e.target === modal || action === "close") modal.close();
-    if (action === "download") downloadBadge(canvas, b.file_name);
+    if (action === "download") downloadPng(canvas, b.file_name);
     if (action === "new") {
       saved.animal = (saved.animal + 1) % b.animals.length;
       save("badge", saved);

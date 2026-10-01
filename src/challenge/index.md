@@ -67,6 +67,10 @@ texts:
   board_total: Punti totali
   board_stars: Stelle raccolte
   board_empty: Ancora nessun record. Gioca il primo livello!
+  board_player: "Chi gioca: {name}"
+  board_export: Salva l'immagine
+  board_file_name: record-tasto-dopo-tasto
+  board_footer: "Tasto dopo tasto · {date}"
   board_reset: Azzera i record
   board_confirm: Vuoi davvero cancellare tutti i record?
 ---

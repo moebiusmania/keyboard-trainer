@@ -386,6 +386,16 @@ html[data-direction="back"]::view-transition-new(screen) {
   text-align: center;
 }
 
+.board-player {
+  margin-block-start: -0.5rem;
+  font-size: 1.15em;
+  font-weight: 500;
+
+  &:empty {
+    display: none;
+  }
+}
+
 .board-totals {
   display: flex;
   flex-wrap: wrap;

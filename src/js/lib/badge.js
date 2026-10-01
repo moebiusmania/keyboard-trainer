@@ -1,20 +1,8 @@
 // The end-of-training badge, drawn on a <canvas>
 // so it can also be downloaded as a PNG image.
+import { color, fit, star } from "./canvas.js";
+
 const SIDE = 800;
-
-function color(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-}
-
-function star(ctx, cx, cy, points, outer, inner) {
-  ctx.beginPath();
-  for (let i = 0; i < points * 2; i++) {
-    const r = i % 2 ? inner : outer;
-    const a = (Math.PI * i) / points - Math.PI / 2;
-    ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
-  }
-  ctx.closePath();
-}
 
 function textOnArc(ctx, text, cx, cy, radius, center = -Math.PI / 2) {
   const spacing = 0.105;
@@ -27,14 +15,6 @@ function textOnArc(ctx, text, cx, cy, radius, center = -Math.PI / 2) {
     ctx.fillText(letter, 0, 0);
     ctx.restore();
   });
-}
-
-function fit(ctx, text, maxWidth, size, weight = 700) {
-  let s = size;
-  do {
-    ctx.font = `${weight} ${s}px Fredoka, system-ui, sans-serif`;
-    s -= 2;
-  } while (ctx.measureText(text).width > maxWidth && s > 16);
 }
 
 export async function drawBadge(canvas, { heading, animal, awarded, name, date }) {
@@ -125,16 +105,4 @@ export async function drawBadge(canvas, { heading, animal, awarded, name, date }
   ctx.fillText(name, c, c + 145);
   ctx.font = "500 24px Fredoka, system-ui, sans-serif";
   ctx.fillText(date, c, c + 188);
-}
-
-export function downloadBadge(canvas, fileName) {
-  canvas.toBlob((blob) => {
-    if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    const a = Object.assign(document.createElement("a"), { href: url, download: `${fileName}.png` });
-    document.body.append(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }, "image/png");
 }
