@@ -84,5 +84,5 @@ texts:
         title: Dino-Dattilografo
 ---
 
-Qui impari a usare la tastiera **con tutte le dita**, una lezione alla volta.
+Qui impari ad usare la tastiera **con tutte le dita**, una lezione alla volta.
 Non serve correre: conta di più essere precisi!

@@ -1,7 +1,7 @@
 ---
 id: interface
 site_name: Tasto dopo tasto
-description: Impara a usare la tastiera giocando, con Tastino!
+description: Impara ad usare la tastiera giocando, con Tastino!
 mascot: Tastino
 preview:
   image: /social-preview.png
